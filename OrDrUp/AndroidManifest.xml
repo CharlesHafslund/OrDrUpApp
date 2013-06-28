@@ -23,12 +23,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.ordrupapp.ordrup.SelectTable"
-            android:label="@string/title_activity_select_table"
-            android:parentActivityName="com.ordrupapp.ordrup.LoginScreen" >
+            android:name="com.ordrupapp.ordrup.TableSelect"
+            android:label="@string/title_activity_table_select" >
+        </activity>
+        <activity
+            android:name="com.ordrupapp.ordrup.TableDetail"
+            android:label="@string/title_activity_table_detail"
+            android:parentActivityName="com.ordrupapp.ordrup.TableSelect" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ordrupapp.ordrup.LoginScreen" />
+                android:value="com.ordrupapp.ordrup.TableSelect" />
         </activity>
     </application>
 

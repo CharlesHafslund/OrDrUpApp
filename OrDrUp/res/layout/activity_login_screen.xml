@@ -9,51 +9,45 @@
     tools:context=".LoginScreen" >
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/logo_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/logo_big" />
-
-    <EditText
-        android:id="@+id/editText1"
+ 	<EditText
+        android:id="@+id/sitecode_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/logo_image"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:ems="10" >
-
-        <requestFocus />
-    </EditText>
+        android:hint="@string/sitecode_message" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/username_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText1"
+        android:layout_below="@id/sitecode_message"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="61dp"
-        android:ems="10" />
+        android:hint="@string/username_message" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/password_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_below="@+id/editText2"
-        android:layout_marginTop="54dp"
-        android:ems="10"
-        android:inputType="textPassword" 
-        android:hint="Password"/>
+        android:layout_below="@id/username_message"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/password_message"
+        android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText3"
+        android:layout_below="@id/password_message"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"
-        android:text="Button" />
+        android:onClick="sendLogin"
+        android:text="@string/button_login" />
+    
 
 </RelativeLayout>
