@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 public class TableSelect extends Activity {
-
+	LinearLayout layout;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,17 +26,31 @@ public class TableSelect extends Activity {
 	}
 	
 	public void getTables(View view) {
-	String tables[] = {"1","2","7","9"};
-	int tableCount = tables.length;
-    Button btn[] = new Button[tableCount];
-    LinearLayout layout = (LinearLayout) findViewById(R.id.tableButtons_list);
+		
+		//need to make a call here to get tables
+		String tables[] = {"1","2","7","9"};
+		int tableCount = tables.length;
+		
+		Button btn[] = new Button[tableCount];
+		
+		if (null != layout && layout.getChildCount() > 0) {                 
+			try {
+				layout.removeViews (0, layout.getChildCount());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
-    for (int i=0;i<tableCount;i++){
-        btn[i] = new Button(this);
-        btn[i].setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
-        btn[i].setText(tables[i]);
-        layout.addView(btn[i]);
-    }
+		layout = (LinearLayout) findViewById(R.id.tableButtons_list);
+
+
+
+		for (int i=0;i<tableCount;i++){
+			btn[i] = new Button(this);
+			btn[i].setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
+			btn[i].setText(tables[i]);
+			layout.addView(btn[i]);
+		}
 	}
 
 }
