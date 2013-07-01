@@ -11,5 +11,7 @@
     <string name="button_login">Login</string>
     <string name="button_getTables">Refresh Tables</string>
     <string name="title_activity_table_detail">TableDetail</string>
+    <string name="table_details_title">Table </string>
+    <string name="table_details_number">None</string>
 
 </resources>

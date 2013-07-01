@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
 public class TableDetail extends Activity {
@@ -14,6 +16,18 @@ public class TableDetail extends Activity {
 		setContentView(R.layout.activity_table_detail);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		
+		//set the table number for the screen
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+		
+		    TextView tableNumberText = (TextView) findViewById(R.id.table_details_number);
+		    String table = extras.getString("table");
+		    tableNumberText.setText(table);
+	
+		}
+		
+		
 	}
 
 	/**

@@ -2,6 +2,7 @@ package com.ordrupapp.ordrup;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.view.Menu;
 import android.view.View;
@@ -48,15 +49,28 @@ public class TableSelect extends Activity {
 				e.printStackTrace();
 			}
 		}
-
+		
+		//Handler for dynamic buttons, passes in the table number
+		View.OnClickListener btnHandler = new View.OnClickListener() {
+		    public void onClick(View v) {
+		        Button tableButton = (Button)v;
+		        String buttonText = tableButton.getText().toString();
+		        Intent intent = new Intent(v.getContext(), TableDetail.class);
+		        intent.putExtra("table", buttonText);
+		        startActivity(intent);
+		    }
+		};
+		
+		
 		layout = (LinearLayout) findViewById(R.id.tableButtons_list);
-
-
-
+		
+		//create the buttons based on the table list and assign the btnHandler to each
 		for (int i=0;i<tableCount;i++){
 			btn[i] = new Button(this);
 			btn[i].setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
 			btn[i].setText(tables[i]);
+			btn[i].setOnClickListener(btnHandler);
+
 			layout.addView(btn[i]);
 		}
 		

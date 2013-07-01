@@ -25,7 +25,14 @@ public class LoginScreen extends Activity {
 	/** Called when the user clicks the Send button */
 	public void sendLogin(View view) {
 	    boolean validLogin = true;
+	    EditText sitecode = (EditText) findViewById(R.id.sitecode_message);
+	    EditText username = (EditText) findViewById(R.id.username_message);
+	    EditText password = (EditText) findViewById(R.id.password_message);
 	    if (validLogin){
+	    	
+	    	//debug message
+	    	Toast.makeText(getApplicationContext(), "SiteCode: " + sitecode.getText().toString() + "\nUsername: " + username.getText().toString() + "\nPassword: " + password.getText().toString(), Toast.LENGTH_LONG).show();
+	    	
 	    	Intent intent = new Intent(this, TableSelect.class);
 	    	EditText editText = (EditText) findViewById(R.id.username_message);
 	    	String message = editText.getText().toString();
