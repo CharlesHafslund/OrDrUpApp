@@ -2,6 +2,7 @@ package com.ordrupapp.ordrup;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +25,13 @@ public class TableSelect extends Activity {
 		getMenuInflater().inflate(R.menu.table_select, menu);
 		return true;
 	}
+	
+	@Override
+    public void onConfigurationChanged(Configuration newConfig) {
+		//retain buttons when rotating
+        super.onConfigurationChanged(newConfig);
+
+    }
 	
 	public void getTables(View view) {
 		
@@ -51,6 +59,7 @@ public class TableSelect extends Activity {
 			btn[i].setText(tables[i]);
 			layout.addView(btn[i]);
 		}
+		
 	}
 
 }
