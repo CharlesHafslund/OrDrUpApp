@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -74,6 +76,9 @@ public class TableSelect extends Activity {
 		for (int i=0;i<tableCount;i++){
 			btn[i] = new Button(this);
 			btn[i].setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
+			btn[i].setBackgroundResource(R.drawable.table);  // add image for kicks
+			btn[i].setTextColor(Color.WHITE);
+			btn[i].setTextSize(TypedValue.COMPLEX_UNIT_SP,32);
 			btn[i].setText(tables[i]);
 			btn[i].setOnClickListener(btnHandler);
 

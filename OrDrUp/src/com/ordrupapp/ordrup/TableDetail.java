@@ -3,6 +3,7 @@ package com.ordrupapp.ordrup;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -124,6 +125,7 @@ public void getOrders(View view) {
 			btn[i] = new Button(this);
 			btn[i].setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
 			btn[i].setBackgroundResource(R.drawable.large_plate);  // add image for kicks
+			btn[i].setTextSize(TypedValue.COMPLEX_UNIT_SP,32);
 			btn[i].setText("Order " + orders[i]);
 			btn[i].setOnClickListener(btnHandler);
 

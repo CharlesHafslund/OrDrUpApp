@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Wrap in Container" description="Wrap in Container" file="/OrDrUp/res/layout/activity_table_detail.xml" flags="6" id="com.android.ide.eclipse.adt.refactoring.wrapin" name="orderButtons_scrollView" proj="/OrDrUp" sel-end="2116" sel-start="1730" stamp="1373467586038" type="android.widget.ScrollView"/>&#x0A;<refactoring comment="Wrap in Container" description="Wrap in Container" file="/OrDrUp/res/layout/activity_table_select.xml" flags="6" id="com.android.ide.eclipse.adt.refactoring.wrapin" name="tableButtons_ScrollView" proj="/OrDrUp" sel-end="1375" sel-start="918" stamp="1373467697639" type="android.widget.ScrollView"/>
+</session>
