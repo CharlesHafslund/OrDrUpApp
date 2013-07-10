@@ -2,6 +2,7 @@ package com.ordrupapp.ordrup;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -29,8 +30,10 @@ public class LoginScreen extends Activity {
 	    EditText username = (EditText) findViewById(R.id.username_message);
 	    EditText password = (EditText) findViewById(R.id.password_message);
 	    if (validLogin){
-	    	
-	    	sessionInfo mySession = new sessionInfo(username.getText().toString(),password.getText().toString(),sitecode.getText().toString());
+	    	sessionInfo mySession = ((sessionInfo)this.getApplication());
+	    	mySession.setUsername(username.getText().toString());
+	    	mySession.setPasswordHash(password.getText().toString());
+	    	mySession.setSitecode(sitecode.getText().toString());
 	    	
 	    	//debug message
 	    	Toast.makeText(getApplicationContext(), "SiteCode: " + mySession.getSitecode() + "\nUsername: " + mySession.getUsername() + "\nPassword: " + mySession.getPasswordHash(), Toast.LENGTH_LONG).show();

@@ -11,6 +11,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 public class TableSelect extends Activity {
 	LinearLayout layout;
@@ -40,6 +41,10 @@ public class TableSelect extends Activity {
 		String tables[] = {"1","2","7","9"};
 		int tableCount = tables.length;
 		
+		sessionInfo mySession = ((sessionInfo)this.getApplication());
+		//debug message
+    	Toast.makeText(getApplicationContext(), "SiteCode: " + mySession.getSitecode() + "\nUsername: " + mySession.getUsername() + "\nPassword: " + mySession.getPasswordHash(), Toast.LENGTH_LONG).show();
+    	
 		Button btn[] = new Button[tableCount];
 		
 		if (null != layout && layout.getChildCount() > 0) {                 

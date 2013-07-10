@@ -1,0 +1,24 @@
+import android.app.Application;
+
+
+public class mySession extends Application {
+	private String username, passwordHash, restaurantID;
+	
+	mySession(String username, String passwordHash, String restaurantID){
+		this.username = username.toString();
+		this.passwordHash = passwordHash.toString();
+		this.restaurantID = restaurantID.toString();
+	}
+	
+	public String getUsername(){
+		return username.toString();
+	}
+	
+	public String getPasswordHash(){
+		return passwordHash.toString();
+	}
+	
+	public String getRestaurantID(){
+		return restaurantID.toString();
+	}
+}
