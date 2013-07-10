@@ -1,0 +1,28 @@
+[
+  {
+    "symbolicName": "android-support-v4",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "bd6479f5dd592790607e0504e66e0f31c2b4d308",
+    "jarFileModificationDate": "2013-06-26T13:16:27.805-05:00",
+    "location": "C:\\Users\\charleshafslund\\git\\OrDrUpApp\\OrDrUp\\libs\\android-support-v4.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "android",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "322db3959c3383f4be9daa75ffa427d1485879ad",
+    "jarFileModificationDate": "2013-06-03T10:03:11.355-05:00",
+    "location": "C:\\Program Files\\adt-bundle-windows-x86_64-20130522\\sdk\\platforms\\android-17\\android.jar",
+    "javaRuntime": false
+  }
+]

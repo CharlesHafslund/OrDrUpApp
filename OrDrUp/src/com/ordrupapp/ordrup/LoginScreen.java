@@ -30,8 +30,10 @@ public class LoginScreen extends Activity {
 	    EditText password = (EditText) findViewById(R.id.password_message);
 	    if (validLogin){
 	    	
+	    	sessionInfo mySession = new sessionInfo(username.getText().toString(),password.getText().toString(),sitecode.getText().toString());
+	    	
 	    	//debug message
-	    	Toast.makeText(getApplicationContext(), "SiteCode: " + sitecode.getText().toString() + "\nUsername: " + username.getText().toString() + "\nPassword: " + password.getText().toString(), Toast.LENGTH_LONG).show();
+	    	Toast.makeText(getApplicationContext(), "SiteCode: " + mySession.getSitecode() + "\nUsername: " + mySession.getUsername() + "\nPassword: " + mySession.getPasswordHash(), Toast.LENGTH_LONG).show();
 	    	
 	    	Intent intent = new Intent(this, TableSelect.class);
 	    	EditText editText = (EditText) findViewById(R.id.username_message);

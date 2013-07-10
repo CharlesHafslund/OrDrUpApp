@@ -1,0 +1,3 @@
+INDEX VERSION 1.126+C:\Users\charleshafslund\git\OrDrUpApp\.metadata\.plugins\org.eclipse.jdt.core
+503698452.index
+1583415722.index
