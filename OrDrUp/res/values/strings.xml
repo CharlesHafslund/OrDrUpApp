@@ -13,5 +13,6 @@
     <string name="title_activity_table_detail">TableDetail</string>
     <string name="table_details_title">Table </string>
     <string name="table_details_number">None</string>
+    <string name="table_details_add_order_button">Add Order</string>
 
 </resources>

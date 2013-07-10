@@ -27,4 +27,25 @@
         android:text="@+id/table_details_number"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <Button
+        android:id="@+id/table_details_add_order_button"
+        android:onClick="addOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/table_details_title"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="28dp"
+        android:text="@string/table_details_add_order_button" />
+
+    <LinearLayout
+        android:id="@+id/orderButtons_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/table_details_add_order_button"
+        android:layout_below="@+id/table_details_number"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical" >
+
+    </LinearLayout>
+
 </RelativeLayout>

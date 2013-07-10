@@ -19,6 +19,7 @@ public class TableSelect extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_table_select);
+		getTables((View)findViewById(R.id.tableButtons_list));
 	}
 
 	@Override
