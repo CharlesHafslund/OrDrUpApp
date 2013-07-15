@@ -38,6 +38,8 @@ public class LoginScreen extends Activity {
 	    	//debug message
 	    	Toast.makeText(getApplicationContext(), "SiteCode: " + mySession.getSitecode() + "\nUsername: " + mySession.getUsername() + "\nPassword: " + mySession.getPasswordHash(), Toast.LENGTH_LONG).show();
 	    	
+	    	//get the menu from the server
+	    	
 	    	Intent intent = new Intent(this, TableSelect.class);
 	    	EditText editText = (EditText) findViewById(R.id.username_message);
 	    	String message = editText.getText().toString();

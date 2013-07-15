@@ -1,0 +1,16 @@
+package com.ordrupapp.ordrup;
+
+import java.util.ArrayList;
+
+public class menu {
+	private ArrayList<menuItem> beverages, appetizers, mainCourse, dessert;
+			
+	public ArrayList<menuItem> getMenuItems(String type){
+		
+		//select type to return
+		
+		return beverages;
+		
+	}
+
+}

@@ -1,0 +1,7 @@
+package com.ordrupapp.ordrup;
+
+public class orderItem {
+	private String name,notes;
+	private float price;
+	int menuItemID;
+}

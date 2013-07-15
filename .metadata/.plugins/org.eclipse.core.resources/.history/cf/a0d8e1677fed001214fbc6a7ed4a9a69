@@ -1,0 +1,16 @@
+package com.ordrupapp.ordrup;
+
+import java.util.ArrayList;
+
+public class order {
+	private int orderID;
+	private ArrayList<orderItem> orderItems;
+	
+	order(){
+		//make request to create new order on server, get back orderID
+	}
+	
+	public void addOrderItem(){
+		
+	}
+}
