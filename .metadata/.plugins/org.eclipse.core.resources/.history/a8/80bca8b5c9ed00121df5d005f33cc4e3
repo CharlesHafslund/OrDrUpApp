@@ -20,14 +20,14 @@ public class sessionInfo extends Application {
 	    OutputStreamWriter request = null;
 	    URL url = null;
 	    String response = null;
-	    String parameters = "username=" + username + "&password=" + passwordHash + "&restautantid=" + sitecode;
+	    String parameters = "username=" + username + "&password=" + passwordHash;
 	    try
 	    {
-	        url = new URL(getString(R.string.login_location));
+	        url = new URL(getString(R.string.loginLocation));
 	        connection = (HttpURLConnection) url.openConnection();
 	        connection.setDoOutput(true);
 	        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-	        connection.setRequestMethod("GET");
+	        connection.setRequestMethod("POST");
 
 	        request = new OutputStreamWriter(connection.getOutputStream());
 	        request.write(parameters);
@@ -52,9 +52,6 @@ public class sessionInfo extends Application {
 	    {
 	        Log.i("NetworkTest","Network Error: " + e);
 	    }
-	    
-	    //change this later
-	    return true;
 	}
 	
 	public void setUsername(String username){

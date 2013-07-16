@@ -20,7 +20,7 @@ public class sessionInfo extends Application {
 	    OutputStreamWriter request = null;
 	    URL url = null;
 	    String response = null;
-	    String parameters = "username=" + username + "&password=" + passwordHash + "&restautantid=" + sitecode;
+	    String parameters = "username=" + username + "&password=" + passwordHash;
 	    try
 	    {
 	        url = new URL(getString(R.string.login_location));

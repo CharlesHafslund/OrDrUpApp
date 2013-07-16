@@ -7,9 +7,9 @@ public class order {
 	private ArrayList<orderItem> orderItems;
 	private int status;
 	
-	order(int tableOrderID){
+	order(){
+		
 		//set the table order id
-		this.tableOrderID = tableOrderID;
 	}
 	
 	public void addOrderItem(int menuItemID, int orderID, String name, float price){

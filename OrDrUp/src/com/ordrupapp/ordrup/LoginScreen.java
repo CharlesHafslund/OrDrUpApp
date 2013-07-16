@@ -29,8 +29,10 @@ public class LoginScreen extends Activity {
 	    EditText sitecode = (EditText) findViewById(R.id.sitecode_message);
 	    EditText username = (EditText) findViewById(R.id.username_message);
 	    EditText password = (EditText) findViewById(R.id.password_message);
+	    sessionInfo mySession = ((sessionInfo)this.getApplication());
+	    //mySession.login(username.toString(), password.toString(), sitecode.toString());
 	    if (validLogin){
-	    	sessionInfo mySession = ((sessionInfo)this.getApplication());
+	    	
 	    	mySession.setUsername(username.getText().toString());
 	    	mySession.setPasswordHash(password.getText().toString());
 	    	mySession.setSitecode(sitecode.getText().toString());
