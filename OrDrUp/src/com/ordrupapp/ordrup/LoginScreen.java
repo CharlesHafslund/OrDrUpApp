@@ -25,17 +25,19 @@ public class LoginScreen extends Activity {
 	}
 	/** Called when the user clicks the Send button */
 	public void sendLogin(View view) {
-	    boolean validLogin = true;
-	    EditText sitecode = (EditText) findViewById(R.id.sitecode_message);
-	    EditText username = (EditText) findViewById(R.id.username_message);
-	    EditText password = (EditText) findViewById(R.id.password_message);
+	    boolean validLogin;
+	    String sitecode = ((EditText) findViewById(R.id.sitecode_message)).getText().toString();
+	    String username = ((EditText) findViewById(R.id.username_message)).getText().toString();
+	    String password = ((EditText) findViewById(R.id.password_message)).getText().toString();
 	    sessionInfo mySession = ((sessionInfo)this.getApplication());
-	    //mySession.login(username.toString(), password.toString(), sitecode.toString());
+	    
+	    validLogin = mySession.verify(username.toString(), password.toString(), sitecode.toString());
+	    
 	    if (validLogin){
 	    	
-	    	mySession.setUsername(username.getText().toString());
-	    	mySession.setPasswordHash(password.getText().toString());
-	    	mySession.setSitecode(sitecode.getText().toString());
+	    	//mySession.setUsername(username.getText().toString());
+	    	//mySession.setPasswordHash(password.getText().toString());
+	    	//mySession.setSitecode(sitecode);
 	    	
 	    	//debug message
 	    	Toast.makeText(getApplicationContext(), "SiteCode: " + mySession.getSitecode() + "\nUsername: " + mySession.getUsername() + "\nPassword: " + mySession.getPasswordHash(), Toast.LENGTH_LONG).show();
