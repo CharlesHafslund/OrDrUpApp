@@ -15,5 +15,11 @@
     <string name="table_details_number">None</string>
     <string name="table_details_add_order_button">Add Order</string>
     <string name="login_location">http://www.ordrupapp.com/</string>
+    <string name="title_activity_menu_screen">MenuScreen</string>
+    <string name="title_section_beverage">Beverages</string>
+    <string name="title_section_appetizer">Appetizers</string>
+    <string name="title_section_main_course">Main Course</string>
+    <string name="title_section_dessert">Deserts</string>
+    
 
 </resources>

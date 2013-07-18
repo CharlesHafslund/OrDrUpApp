@@ -1,5 +1,10 @@
 package com.ordrupapp.ordrup;
 
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
 public class orderItem {
 	private String name,notes;
 	private float price;
@@ -42,6 +47,8 @@ public class orderItem {
 	public String getNotes(){
 		return notes.toString();
 	}
+	
+	
 	
 	
 }

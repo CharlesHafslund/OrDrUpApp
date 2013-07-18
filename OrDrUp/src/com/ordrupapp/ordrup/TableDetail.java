@@ -84,6 +84,9 @@ public void addOrder(View view){
 	orders = newOrders;
 	
 	getOrders((View)findViewById(R.id.orderButtons_list));
+	Intent intent = new Intent(view.getContext(), MenuScreen.class);
+    intent.putExtra("order", "X");
+    startActivity(intent);
 }
 	
 public void getOrders(View view) {
