@@ -3,7 +3,8 @@ package com.ordrupapp.ordrup;
 import android.app.Application;
 
 
-public class sessionInfo extends Application {
+public enum sessionInfo{
+	INSTANCE;
 	private String username, passwordHash, sitecode;
 	
 	public boolean verify(String username, String password, String sitecode){

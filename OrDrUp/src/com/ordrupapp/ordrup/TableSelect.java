@@ -44,7 +44,7 @@ public class TableSelect extends Activity {
 		String tables[] = {"1","2","7","9"};
 		int tableCount = tables.length;
 		
-		sessionInfo mySession = ((sessionInfo)this.getApplication());
+		sessionInfo mySession = sessionInfo.INSTANCE; //((sessionInfo)this.getApplication());
 		//debug message
     	Toast.makeText(getApplicationContext(), "SiteCode: " + mySession.getSitecode() + "\nUsername: " + mySession.getUsername() + "\nPassword: " + mySession.getPasswordHash(), Toast.LENGTH_LONG).show();
     	

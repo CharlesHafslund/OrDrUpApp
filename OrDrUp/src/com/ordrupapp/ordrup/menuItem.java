@@ -3,9 +3,9 @@ package com.ordrupapp.ordrup;
 public class menuItem {
 	private int menuItemID;
 	private String name;
-	private float price;
+	private double price;
 	
-	menuItem(int menuItemID, String name, float price){
+	menuItem(int menuItemID, String name, double price){
 		this.menuItemID = menuItemID;
 		this.name = name.toString();
 		this.price = price;
@@ -20,7 +20,7 @@ public class menuItem {
 		return name.toString();
 	}
 	
-	public float getPrice(){
+	public double getPrice(){
 		return price;
 	}
 }

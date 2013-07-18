@@ -29,7 +29,8 @@ public class LoginScreen extends Activity {
 	    String sitecode = ((EditText) findViewById(R.id.sitecode_message)).getText().toString();
 	    String username = ((EditText) findViewById(R.id.username_message)).getText().toString();
 	    String password = ((EditText) findViewById(R.id.password_message)).getText().toString();
-	    sessionInfo mySession = ((sessionInfo)this.getApplication());
+	    sessionInfo mySession = sessionInfo.INSTANCE; //((sessionInfo)this.getApplication());
+	    menu myMenu = menu.INSTANCE; //((menu)this.getApplication());
 	    
 	    validLogin = mySession.verify(username.toString(), password.toString(), sitecode.toString());
 	    
@@ -43,6 +44,7 @@ public class LoginScreen extends Activity {
 	    	Toast.makeText(getApplicationContext(), "SiteCode: " + mySession.getSitecode() + "\nUsername: " + mySession.getUsername() + "\nPassword: " + mySession.getPasswordHash(), Toast.LENGTH_LONG).show();
 	    	
 	    	//get the menu from the server
+	    	myMenu.updateMenu();
 	    	
 	    	Intent intent = new Intent(this, TableSelect.class);
 	    	EditText editText = (EditText) findViewById(R.id.username_message);
