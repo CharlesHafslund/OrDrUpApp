@@ -42,6 +42,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ordrupapp.ordrup.TableDetail" />
         </activity>
+        <activity
+            android:name="com.ordrupapp.ordrup.OrderDetails"
+            android:label="@string/title_activity_order_details"
+            android:parentActivityName="com.ordrupapp.ordrup.TableDetail" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ordrupapp.ordrup.TableDetail" />
+        </activity>
     </application>
 
 </manifest>

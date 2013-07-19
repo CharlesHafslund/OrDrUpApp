@@ -18,6 +18,7 @@ public class TableDetail extends Activity {
 	LinearLayout layout;
 	//need to make a call here to get orders for table
 	String orders[] = {"1","2"};
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -91,7 +92,8 @@ public void addOrder(View view){
 	
 public void getOrders(View view) {
 				
-		int orderCount = orders.length;
+		
+	int orderCount = orders.length;
 		
 		sessionInfo mySession = sessionInfo.INSTANCE; //((sessionInfo)this.getApplication());
 		//debug message

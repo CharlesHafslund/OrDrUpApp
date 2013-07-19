@@ -161,13 +161,25 @@ public class MenuScreen extends FragmentActivity implements
 					ARG_SECTION_NUMBER)));
 			
 			GridLayout layout = (GridLayout) rootView.findViewById(R.id.menu_item_grid);
+			
+			//clear the view
+			layout.removeAllViews();
+			
 			layout.setColumnCount(4);
 			
-			for (int i = 0; i < menu.INSTANCE.getMenuItemList(menu.INSTANCE.BEVERAGES).size(); i++){
-				layout.addView(menu.INSTANCE.getMenuItemList(menu.INSTANCE.BEVERAGES).get(i).getViewArray(rootView)[0]);
-				layout.addView(menu.INSTANCE.getMenuItemList(menu.INSTANCE.BEVERAGES).get(i).getViewArray(rootView)[1]);
-				layout.addView(menu.INSTANCE.getMenuItemList(menu.INSTANCE.BEVERAGES).get(i).getViewArray(rootView)[2]);
-				layout.addView(menu.INSTANCE.getMenuItemList(menu.INSTANCE.BEVERAGES).get(i).getViewArray(rootView)[3]);
+			
+			//get the section number
+			int section = getArguments().getInt(ARG_SECTION_NUMBER) -1;
+			
+			//add the menu items to the screen for the current section
+			
+			//add the children
+			for (int i = 0; i < menu.INSTANCE.getMenuItemList(section).size(); i++){
+				layout.addView(menu.INSTANCE.getMenuItemList(section).get(i).getViewArray(rootView)[0]);
+				layout.addView(menu.INSTANCE.getMenuItemList(section).get(i).getViewArray(rootView)[1]);
+				layout.addView(menu.INSTANCE.getMenuItemList(section).get(i).getViewArray(rootView)[2]);
+				layout.addView(menu.INSTANCE.getMenuItemList(section).get(i).getViewArray(rootView)[3]);
+				//menu.INSTANCE.getMenuItemList(section).get(i).getViewArray(rootView)[3].setO
 			}
 			
 			return rootView;

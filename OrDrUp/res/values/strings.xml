@@ -20,6 +20,6 @@
     <string name="title_section_appetizer">Appetizers</string>
     <string name="title_section_main_course">Main Course</string>
     <string name="title_section_dessert">Deserts</string>
-    
+    <string name="title_activity_order_details">OrderDetails</string>
 
 </resources>

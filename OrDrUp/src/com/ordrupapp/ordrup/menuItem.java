@@ -1,5 +1,6 @@
 package com.ordrupapp.ordrup;
 
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,10 +32,15 @@ public class menuItem {
 	public View[] getViewArray(View view){
 		TextView vName = new TextView(view.getContext());
 		vName.setText(name);
+		vName.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
 		TextView vPrice = new TextView(view.getContext());
 		vPrice.setText(Double.toString(price));
+		vPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
 		EditText vNotes = new EditText(view.getContext());
+		vNotes.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
 		Button addItem = new Button(view.getContext());
+		addItem.setText("Add");
+		addItem.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
 		View[] itemView = {vName,vPrice,vNotes,addItem};
 		return itemView;
 		

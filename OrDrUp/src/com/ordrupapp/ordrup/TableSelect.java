@@ -1,5 +1,7 @@
 package com.ordrupapp.ordrup;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -40,11 +42,22 @@ public class TableSelect extends Activity {
 	
 	public void getTables(View view) {
 		
-		//need to make a call here to get tables
-		String tables[] = {"1","2","7","9"};
-		int tableCount = tables.length;
+		//get a reference to the session info
+		sessionInfo mySession = sessionInfo.INSTANCE;
 		
-		sessionInfo mySession = sessionInfo.INSTANCE; //((sessionInfo)this.getApplication());
+		//need to make a call here to get tables from API
+		ArrayList<table> tables = mySession.getTables();
+		tables = new ArrayList<table>();
+		tables.add(new table(111,1));
+		tables.add(new table(121,2));
+		tables.add(new table(113,7));
+		tables.add(new table(131,9));
+		
+		
+		
+		int tableCount = tables.size();
+		
+		
 		//debug message
     	Toast.makeText(getApplicationContext(), "SiteCode: " + mySession.getSitecode() + "\nUsername: " + mySession.getUsername() + "\nPassword: " + mySession.getPasswordHash(), Toast.LENGTH_LONG).show();
     	
@@ -58,6 +71,7 @@ public class TableSelect extends Activity {
 			}
 		}
 		
+		
 		//Handler for dynamic buttons, passes in the table number
 		View.OnClickListener btnHandler = new View.OnClickListener() {
 		    public void onClick(View v) {
@@ -65,9 +79,16 @@ public class TableSelect extends Activity {
 		        String buttonText = tableButton.getText().toString();
 		        Intent intent = new Intent(v.getContext(), TableDetail.class);
 		        intent.putExtra("table", buttonText);
+		        intent.putExtra("index", tableButton.getTag().toString()); //get the array index somehow
+		        
+		      //debug message
+		    	Toast.makeText(getApplicationContext(), "Tag: " + tableButton.getTag().toString(), Toast.LENGTH_LONG).show();
+		        
 		        startActivity(intent);
+		        
 		    }
 		};
+		
 		
 		
 		layout = (LinearLayout) findViewById(R.id.tableButtons_list);
@@ -79,8 +100,9 @@ public class TableSelect extends Activity {
 			btn[i].setBackgroundResource(R.drawable.table);  // add image for kicks
 			btn[i].setTextColor(Color.WHITE);
 			btn[i].setTextSize(TypedValue.COMPLEX_UNIT_SP,32);
-			btn[i].setText(tables[i]);
+			btn[i].setText(Integer.toString(tables.get(i).getTableNumber()));
 			btn[i].setOnClickListener(btnHandler);
+			btn[i].setTag(i);
 
 			layout.addView(btn[i]);
 		}
