@@ -10,6 +10,7 @@ public class order {
 	order(int tableOrderID){
 		//set the table order id
 		this.tableOrderID = tableOrderID;
+		orderItems = new ArrayList<orderItem>();
 	}
 	
 	public void addOrderItem(int menuItemID){

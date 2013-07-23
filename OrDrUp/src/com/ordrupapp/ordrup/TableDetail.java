@@ -82,12 +82,7 @@ public class TableDetail extends Activity {
 
 	//dummy method, add real functionality
 	public void addOrder(View view){
-//			String[] newOrders = new String[orders.length +1];
-//			for (int i = 0; i < orders.length; i++){
-//				newOrders[i] = orders[i];
-//			}
-//			newOrders[orders.length] = "X";
-//			orders = newOrders;
+
 		sessionInfo mySession = sessionInfo.getInstance();
 		int orderNumber = mySession.getTables().get(currentTableIndex).addOrder();
 			
@@ -100,12 +95,7 @@ public class TableDetail extends Activity {
 
 	public void getOrders(View view) {
 		sessionInfo mySession = sessionInfo.getInstance();
-		
-		
-		
-	//debug message
-	Toast.makeText(getApplicationContext(), "Info: " + mySession.getTables().size(), Toast.LENGTH_LONG).show();
-	
+			
 		int orderCount = mySession.getTables().get(currentTableIndex).getOrderCount();
 			
 

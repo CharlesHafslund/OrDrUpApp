@@ -41,7 +41,7 @@ public class LoginScreen extends Activity {
 	    	//mySession.setSitecode(sitecode);
 	    	
 	    	//debug message
-	    	Toast.makeText(getApplicationContext(), "SiteCode: " + mySession.getSitecode() + "\nUsername: " + mySession.getUsername() + "\nPassword: " + mySession.getPassword(), Toast.LENGTH_LONG).show();
+	    	Toast.makeText(getApplicationContext(), "SiteCode: " + mySession.getSitecode() + "\nUsername: " + mySession.getUsername() + "\nPassword: " + mySession.getPassword(), Toast.LENGTH_SHORT).show();
 	    	
 	    	//get the menu from the server
 	    	myMenu.updateMenu();
@@ -54,7 +54,7 @@ public class LoginScreen extends Activity {
 	    }
 	    else {
 	    	//send an invalid message
-	    	Toast.makeText(getApplicationContext(), "Invalid Login", Toast.LENGTH_LONG).show();
+	    	Toast.makeText(getApplicationContext(), "Invalid Login", Toast.LENGTH_SHORT).show();
 	    }
 	}
 

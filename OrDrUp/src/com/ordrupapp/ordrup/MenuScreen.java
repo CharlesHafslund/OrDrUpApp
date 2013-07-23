@@ -9,6 +9,7 @@ import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +32,7 @@ public class MenuScreen extends FragmentActivity implements
 	private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
 
 
-	
+	private int orderNumber, currentTableIndex;
 	
 	
 	
@@ -50,14 +52,22 @@ public class MenuScreen extends FragmentActivity implements
 
 		// Set up the dropdown list navigation in the action bar.
 		actionBar.setListNavigationCallbacks(
-		// Specify a SpinnerAdapter to populate the dropdown list.
+				// Specify a SpinnerAdapter to populate the dropdown list.
 				new ArrayAdapter<String>(getActionBarThemedContextCompat(),
 						android.R.layout.simple_list_item_1,
 						android.R.id.text1, new String[] {
-								getString(R.string.title_section_beverage),
-								getString(R.string.title_section_appetizer), 
-								getString(R.string.title_section_main_course),
-								getString(R.string.title_section_dessert),}), this);
+					getString(R.string.title_section_beverage),
+					getString(R.string.title_section_appetizer), 
+					getString(R.string.title_section_main_course),
+					getString(R.string.title_section_dessert),}), this);
+		//set the table number and order number for the screen
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+
+			currentTableIndex = extras.getInt("tableIndex");
+			orderNumber = extras.getInt("orderNumber");
+
+		}
 	}
 	
 	
@@ -166,51 +176,40 @@ public class MenuScreen extends FragmentActivity implements
 			//get the section number
 			int section = getArguments().getInt(ARG_SECTION_NUMBER) -1;
 			
-			
-
-			
 			//add the menu items to the screen for the current section
+			TextView vName,vPrice;
+			EditText vNotes;
+			Button addItem;
 			
 			//add the children
 			for (int i = 0; i < menu.INSTANCE.getMenuItemList(section).size(); i++){
-				layout.addView(menu.INSTANCE.getMenuItemList(section).get(i).getViewArray(rootView)[0]);
-				layout.addView(menu.INSTANCE.getMenuItemList(section).get(i).getViewArray(rootView)[1]);
-				layout.addView(menu.INSTANCE.getMenuItemList(section).get(i).getViewArray(rootView)[2]);
-				layout.addView(menu.INSTANCE.getMenuItemList(section).get(i).getViewArray(rootView)[3]);
+				vName = new TextView(container.getContext());
+				vName.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
+				vName.setText(menu.INSTANCE.getMenuItemList(section).get(i).getName());
+								
+				vPrice = new TextView(container.getContext());
+				vPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
+				vPrice.setText(Double.toString(menu.INSTANCE.getMenuItemList(section).get(i).getPrice()));
+				
+				vNotes = new EditText(container.getContext());
+				vNotes.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
+				
+				addItem = new Button(container.getContext());
+				addItem.setBackgroundResource(R.drawable.add_button);
+				addItem.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
+				
+				layout.addView(addItem);
+				layout.addView(vName);
+				layout.addView(vNotes);
+				layout.addView(vPrice);
 				
 				
 			}
-			
+						
 			return rootView;
 		
 		}
 		
-//		//Handler for dynamic buttons, passes in the table number
-//				View.OnClickListener btnHandler = new View.OnClickListener() {
-//				    public void onClick(View v) {
-//				        Button tableButton = (Button)v;
-//				        String buttonText = tableButton.getText().toString();
-//				        Intent intent = new Intent(v.getContext(), TableDetail.class);
-//				        intent.putExtra("item", "info");
-//				        startActivity(intent);
-//				    }
-//				};}
-				
-				
-//				layout = (LinearLayout) findViewById(R.id.tableButtons_list);
-//				
-//				//create the buttons based on the table list and assign the btnHandler to each
-//				for (int i=0;i<tableCount;i++){
-//					btn[i] = new Button(this);
-//					btn[i].setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
-//					btn[i].setBackgroundResource(R.drawable.table);  // add image for kicks
-//					btn[i].setTextColor(Color.WHITE);
-//					btn[i].setTextSize(TypedValue.COMPLEX_UNIT_SP,32);
-//					btn[i].setText(tables[i]);
-//					btn[i].setOnClickListener(btnHandler);
-//
-//					layout.addView(btn[i]);
-//				}
 	}
 
 }
