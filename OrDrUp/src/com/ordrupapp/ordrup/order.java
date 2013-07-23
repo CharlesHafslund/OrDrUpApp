@@ -33,6 +33,10 @@ public class order {
 		return orderItems.size();
 	}
 	
+	public ArrayList<orderItem> getOrderItems(){
+		return orderItems;
+	}
+	
 	public int getStatus(){
 		//get the order status from the DB and return it
 		return 0;

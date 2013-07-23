@@ -22,6 +22,14 @@ public class TableDetail extends Activity {
 	//String orders[] = {"1","2"};
 	int currentTableIndex;
 	//ArrayList<order> myOrders;
+	
+    private static String[] tag = new String[5];
+	
+	private final int TABLE_INDEX = 0,
+						ORDER_NUMBER = 1,
+						MENU_TYPE = 2,
+						MENU_INDEX = 3,
+						NOTES = 4;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +45,7 @@ public class TableDetail extends Activity {
 			TextView tableNumberText = (TextView) findViewById(R.id.table_details_number);
 			String table = extras.getString("tableNumber");
 			currentTableIndex = extras.getInt("tableIndex");
+			tag[TABLE_INDEX] = Integer.toString(currentTableIndex);
 			tableNumberText.setText(table);
 			getOrders((View)findViewById(R.id.orderButtons_list));
 
@@ -113,13 +122,16 @@ public class TableDetail extends Activity {
 
 
 			//update this for orders versus tables
-			//Handler for dynamic buttons, passes in the table number
+			//Handler for dynamic order buttons, passes in the table ID and order ID
 			View.OnClickListener btnHandler = new View.OnClickListener() {
 				public void onClick(View v) {
+					String[] tags = (String[]) v.getTag();
 					Button orderButton = (Button)v;
 					String buttonText = orderButton.getText().toString();
-					Intent intent = new Intent(v.getContext(), TableDetail.class);
-					intent.putExtra("table", buttonText);
+					Intent intent = new Intent(v.getContext(), OrderDetails.class);
+					intent.putExtra("tableIndex", Integer.parseInt(tags[0]));
+					intent.putExtra("orderNumber", Integer.parseInt(tags[1]));
+					//intent.putExtra("table", buttonText);
 					startActivity(intent);
 				}
 			};
@@ -134,6 +146,8 @@ public class TableDetail extends Activity {
 				btn[i].setBackgroundResource(R.drawable.large_plate);  // add image for kicks
 				btn[i].setTextSize(TypedValue.COMPLEX_UNIT_SP,32);
 				btn[i].setText("Order " + (i + 1));
+				tag[ORDER_NUMBER] = Integer.toString(i);
+				btn[i].setTag(tag.clone());
 				btn[i].setOnClickListener(btnHandler);
 
 				layout.addView(btn[i]);

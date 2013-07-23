@@ -54,8 +54,7 @@ public class TableSelect extends Activity {
 		//else ignore
 		//point tables to dummy
 		
-		//ArrayList<table> tables = mySession.getTables();
-		//tables = new ArrayList<table>();
+		
 		mySession.getTables().add(new table(111,1));
 		
 		mySession.getTables().add(new table(113,7));

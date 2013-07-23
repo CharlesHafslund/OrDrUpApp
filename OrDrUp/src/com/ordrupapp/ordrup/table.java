@@ -37,6 +37,17 @@ public class table implements Comparable {
 		}
 	}
 	
+	public void addOrderItem(int orderNumber, int sectionID, int menuItemID){
+//		int orderIndex = orderNumber-1;
+//		if (orderIndex < tableOrders.size()){
+//			tableOrders.get(orderIndex).addOrderItem(menuItemID);
+//		}
+		
+		//fix this
+		
+		
+	}
+	
 	public int getOrderCount(){
 		if (tableOrders.isEmpty()) return 0;
 		

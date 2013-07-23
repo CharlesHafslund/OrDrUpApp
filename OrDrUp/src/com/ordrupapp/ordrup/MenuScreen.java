@@ -32,7 +32,14 @@ public class MenuScreen extends FragmentActivity implements
 	private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
 
 
-	private int orderNumber, currentTableIndex;
+	private static int orderNumber, currentTableIndex;
+	private static String[] tag = new String[5];
+	
+	private final int TABLE_INDEX = 0,
+						ORDER_NUMBER = 1,
+						MENU_TYPE = 2,
+						MENU_INDEX = 3,
+						NOTES = 4;
 	
 	
 	
@@ -61,15 +68,24 @@ public class MenuScreen extends FragmentActivity implements
 					getString(R.string.title_section_main_course),
 					getString(R.string.title_section_dessert),}), this);
 		//set the table number and order number for the screen
-		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-
-			currentTableIndex = extras.getInt("tableIndex");
-			orderNumber = extras.getInt("orderNumber");
-
-		}
+//		Bundle extras = getIntent().getExtras();
+		
+//		orderNumber = getIntent().getIntExtra("orderNumber", -1);
+//		currentTableIndex = getIntent().getIntExtra("tableIndex", -1);
+		
+		tag[TABLE_INDEX] = Integer.toString(currentTableIndex);
+		tag[ORDER_NUMBER] = Integer.toString(orderNumber);
+		
+		
+		
+//		if (extras != null) {
+//
+//			currentTableIndex =  extras.getInt("tableIndex");
+//			orderNumber = extras.getInt("orderNumber");
+//			
+//			//Integer to get a static?
+//		}
 	}
-	
 	
 	/**
 	 * Backward-compatible version of {@link ActionBar#getThemedContext()} that
@@ -149,7 +165,11 @@ public class MenuScreen extends FragmentActivity implements
 		 */
 		public static final String ARG_SECTION_NUMBER = "section_number";
 		
-		
+		private final int TABLE_INDEX = 0,
+				ORDER_NUMBER = 1,
+				MENU_TYPE = 2,
+				MENU_INDEX = 3,
+				NOTES = 4;
 		
 
 		public MenuSectionFragment() {
@@ -176,10 +196,30 @@ public class MenuScreen extends FragmentActivity implements
 			//get the section number
 			int section = getArguments().getInt(ARG_SECTION_NUMBER) -1;
 			
+			tag[MENU_TYPE] = Integer.toString(section);
+			
 			//add the menu items to the screen for the current section
 			TextView vName,vPrice;
 			EditText vNotes;
 			Button addItem;
+			
+			//Handler for dynamic buttons
+			View.OnClickListener btnHandler = new View.OnClickListener() {
+			    public void onClick(View v) {
+			        
+			        String[] tags = (String[]) v.getTag();
+			        
+			        sessionInfo.getInstance().
+			        			getTables().									//from my list of tables
+			        			get(Integer.parseInt(tags[0])).					//for the current table
+			        			addOrderItem(Integer.parseInt(tags[1]), 		//to specified order index
+			        							Integer.parseInt(tags[2]), 		//add an item of type
+			        							Integer.parseInt(tags[3]));		//with type specific index 
+			        
+			        		        
+			    }
+			};
+			
 			
 			//add the children
 			for (int i = 0; i < menu.INSTANCE.getMenuItemList(section).size(); i++){
@@ -197,7 +237,9 @@ public class MenuScreen extends FragmentActivity implements
 				addItem = new Button(container.getContext());
 				addItem.setBackgroundResource(R.drawable.add_button);
 				addItem.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
-				
+				tag[MENU_INDEX] = Integer.toString(i);
+				addItem.setTag(tag.clone());
+				addItem.setOnClickListener(btnHandler);
 				layout.addView(addItem);
 				layout.addView(vName);
 				layout.addView(vNotes);

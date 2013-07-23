@@ -4,16 +4,35 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 
 public class OrderDetails extends Activity {
-
+	
+	
+	LinearLayout layout;
+	int orderNumber, currentTableIndex;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_order_details);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+
+			//TextView tableNumberText = (TextView) findViewById(R.id.table_details_number);
+			//String table = extras.getString("tableNumber");
+			currentTableIndex = extras.getInt("tableIndex");
+			orderNumber = extras.getInt("orderNumber");
+			//tableNumberText.setText(table);
+			
+	
+
+		getOrderItems((View)findViewById(R.id.order_details_list));
+		}
 	}
 
 	/**
@@ -47,6 +66,29 @@ public class OrderDetails extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public void getOrderItems(View view){
+		sessionInfo mySession = sessionInfo.getInstance();
+		
+		if (null != layout && layout.getChildCount() > 0) {                 
+			try {
+				layout.removeViews (0, layout.getChildCount());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		layout = (LinearLayout) findViewById(R.id.order_details_list);
+		
+		TextView orderItemName;
+		
+		for (int i = 0; i < mySession.getTables().get(currentTableIndex).getOrders().get(orderNumber).getOrderItemCount(); i++){
+			orderItemName = new TextView(view.getContext());
+			orderItemName.setText(mySession.getTables().get(currentTableIndex).getOrders().get(orderNumber).getOrderItems().get(i).getName());
+			layout.addView(orderItemName);
+		}
+		
 	}
 
 }

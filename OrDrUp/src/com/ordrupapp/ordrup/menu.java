@@ -58,9 +58,9 @@ public enum menu{
 		
 		dessert.clear();
 		dessert.add(new menuItem(121, "Super Brownies", 6.99));
-		dessert.add(new menuItem(121, "Not So Super Brownies", 5.99));
-		dessert.add(new menuItem(121, "Just A Brownie", 4.99));
-		dessert.add(new menuItem(121, "Bag of Brownie Mix", 3.99));
+		dessert.add(new menuItem(122, "Not So Super Brownies", 5.99));
+		dessert.add(new menuItem(123, "Just A Brownie", 4.99));
+		dessert.add(new menuItem(124, "Bag of Brownie Mix", 3.99));
 		
 	}
 
