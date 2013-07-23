@@ -39,19 +39,24 @@ public enum menu{
 	public void updateMenu(){
 		//this will eventually be an API call to get the items and add them in
 		
+		beverages.clear();
 		beverages.add(new menuItem(111, "Pop", 2.99));
 		beverages.add(new menuItem(112, "Beer", 4.99));
 		beverages.add(new menuItem(113, "Wine - LeCheapo DeLaBoxo (Glass)", 3.99));
+		beverages.add(new menuItem(114, "Tall Glass STFU", 0.00));
 		
+		appetizers.clear();
 		appetizers.add(new menuItem(114, "Lamb Fries", 6.99));
 		appetizers.add(new menuItem(115, "Surprise Item", 5.99));
 		appetizers.add(new menuItem(116, "Leftover Mishmash", 4.99));
 		
+		mainCourse.clear();
 		mainCourse.add(new menuItem(117, "Hamburger", 6.99));
 		mainCourse.add(new menuItem(118, "Chicken Fingers", 6.99));
 		mainCourse.add(new menuItem(119, "Lutefisk Hotdish", 6.99));
 		mainCourse.add(new menuItem(120, "Block o' Spam", 6.99));
 		
+		dessert.clear();
 		dessert.add(new menuItem(121, "Super Brownies", 6.99));
 		dessert.add(new menuItem(121, "Not So Super Brownies", 5.99));
 		dessert.add(new menuItem(121, "Just A Brownie", 4.99));

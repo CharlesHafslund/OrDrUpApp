@@ -1,10 +1,12 @@
 package com.ordrupapp.ordrup;
 
+import android.content.Intent;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class menuItem {
 	private int menuItemID;
@@ -40,6 +42,14 @@ public class menuItem {
 		vNotes.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
 		Button addItem = new Button(view.getContext());
 		addItem.setText("Add");
+		addItem.setOnClickListener(new View.OnClickListener() {
+		    public void onClick(View v) {
+		        Button myButton = (Button)v;
+		        ///do something
+		        
+		               		        
+		    }
+		});
 		addItem.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
 		View[] itemView = {vName,vPrice,vNotes,addItem};
 		return itemView;

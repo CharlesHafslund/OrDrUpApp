@@ -12,12 +12,20 @@ public class order {
 		this.tableOrderID = tableOrderID;
 	}
 	
-	public void addOrderItem(int menuItemID, int orderID, String name, float price){
-		addOrderItem(menuItemID, orderID, name, price, "");
+	public void addOrderItem(int menuItemID){
+		orderItems.add(new orderItem(menuItemID));
 	}
 	
-	public void addOrderItem(int menuItemID, int orderID, String name, float price, String notes){
-		orderItems.add(new orderItem(menuItemID, orderID, name, price, notes));
+	
+	//remove?
+	public void addOrderItem(int menuItemID, String name, float price){
+		addOrderItem(menuItemID, name, price, "");
+	}
+	
+	
+	//remove?
+	public void addOrderItem(int menuItemID, String name, float price, String notes){
+		orderItems.add(new orderItem(menuItemID, name, price, notes));
 	}
 	
 	public int getOrderItemCount(){

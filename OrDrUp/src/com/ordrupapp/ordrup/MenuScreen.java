@@ -5,25 +5,20 @@ import android.app.ActionBar;
 import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
-import android.text.Layout;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MenuScreen extends FragmentActivity implements
 		ActionBar.OnNavigationListener {
@@ -171,6 +166,9 @@ public class MenuScreen extends FragmentActivity implements
 			//get the section number
 			int section = getArguments().getInt(ARG_SECTION_NUMBER) -1;
 			
+			
+
+			
 			//add the menu items to the screen for the current section
 			
 			//add the children
@@ -179,7 +177,8 @@ public class MenuScreen extends FragmentActivity implements
 				layout.addView(menu.INSTANCE.getMenuItemList(section).get(i).getViewArray(rootView)[1]);
 				layout.addView(menu.INSTANCE.getMenuItemList(section).get(i).getViewArray(rootView)[2]);
 				layout.addView(menu.INSTANCE.getMenuItemList(section).get(i).getViewArray(rootView)[3]);
-				//menu.INSTANCE.getMenuItemList(section).get(i).getViewArray(rootView)[3].setO
+				
+				
 			}
 			
 			return rootView;

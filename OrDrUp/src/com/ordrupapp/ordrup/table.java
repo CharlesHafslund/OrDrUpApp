@@ -2,7 +2,7 @@ package com.ordrupapp.ordrup;
 
 import java.util.ArrayList;
 
-public class table {
+public class table implements Comparable {
 	int tableID, 		//this is the tableID in the database
 		tableNumber;	//this is the restaurant's simple table number
 	ArrayList<order> tableOrders;
@@ -10,11 +10,12 @@ public class table {
 	table(int tableID, int tableNumber){
 		this.tableID = tableID;
 		this.tableNumber = tableNumber;
-		tableOrders = new ArrayList<order>(0);
+		tableOrders = new ArrayList<order>(1);
 	}
 	
-	public void addOrder(){
+	public int addOrder(){
 		tableOrders.add(new order(tableOrders.size()+1));
+		return tableOrders.size() - 1; //return the order index
 	}
 	
 	public int getTableID(){
@@ -23,6 +24,37 @@ public class table {
 	
 	public int getTableNumber(){
 		return tableNumber;
+	}
+	
+	public ArrayList<order> getOrders(){
+		return tableOrders;
+	}
+	
+	public void addOrderItem(int orderIndex, int menuItemID){
+		if (orderIndex < tableOrders.size()){
+			tableOrders.get(orderIndex).addOrderItem(menuItemID);
+		}
+	}
+	
+	public int getOrderCount(){
+		if (tableOrders.isEmpty()) return 0;
+		
+		else return tableOrders.size();
+	}
+	
+	public boolean clearTable(){
+		//check it bill paid for table
+		//if paid, set status to open
+		return true;
+	}
+
+	@Override
+	//to sort tables for display
+	public int compareTo(Object anotherTable) {
+		if (!(anotherTable instanceof table))
+		      throw new ClassCastException("A table object expected.");
+		    int anotherTableNumber = ((table) anotherTable).getTableNumber();  
+		    return this.getTableNumber() - anotherTableNumber;  
 	}
 	
 }

@@ -23,7 +23,7 @@ public class APIRequestor {
 		try
 		{
 			//build the url and open the connection
-			url = new URL("http://api.ordrupapp.com/" + resource + "?" + "Username=" + mySession.getUsername() + "&Password=" + mySession.getPasswordHash() + parameters);
+			url = new URL("http://api.ordrupapp.com/" + resource + "?" + "Username=" + mySession.getUsername() + "&Password=" + mySession.getPassword() + parameters);
 			connection = (HttpURLConnection) url.openConnection();
 			connection.setDoOutput(true);
 

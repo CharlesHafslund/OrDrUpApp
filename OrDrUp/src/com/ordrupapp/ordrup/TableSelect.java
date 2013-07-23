@@ -1,6 +1,7 @@
 package com.ordrupapp.ordrup;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -43,24 +44,37 @@ public class TableSelect extends Activity {
 	public void getTables(View view) {
 		
 		//get a reference to the session info
-		sessionInfo mySession = sessionInfo.INSTANCE;
-		
-		//need to make a call here to get tables from API
-		ArrayList<table> tables = mySession.getTables();
-		tables = new ArrayList<table>();
-		tables.add(new table(111,1));
-		tables.add(new table(121,2));
-		tables.add(new table(113,7));
-		tables.add(new table(131,9));
+		sessionInfo mySession = sessionInfo.getInstance();
 		
 		
 		
-		int tableCount = tables.size();
+		//need to make a call here to get tables from API, this should be a find and add it not exist
+		//if exist in API request and current list, add existing table to dummy
+		//if exist in API and not in current list, add new table to dummy
+		//else ignore
+		//point tables to dummy
 		
+		//ArrayList<table> tables = mySession.getTables();
+		//tables = new ArrayList<table>();
+		mySession.getTables().add(new table(111,1));
+		
+		mySession.getTables().add(new table(113,7));
+		mySession.getTables().add(new table(131,9));
+		mySession.getTables().add(new table(121,2));
+		
+		
+		//sort the tables for easy viewing
+		//Collections.sort(tables);
 		
 		//debug message
-    	Toast.makeText(getApplicationContext(), "SiteCode: " + mySession.getSitecode() + "\nUsername: " + mySession.getUsername() + "\nPassword: " + mySession.getPasswordHash(), Toast.LENGTH_LONG).show();
+    	Toast.makeText(getApplicationContext(), "SiteCode: " + mySession.getSitecode() + "\nUsername: " + mySession.getUsername() + "\nPassword: " + mySession.getPassword() + "\nTable Count: " + mySession.getTables().size(), Toast.LENGTH_LONG).show();
     	
+		
+		
+		
+		int tableCount = mySession.getTables().size();
+		
+			
 		Button btn[] = new Button[tableCount];
 		
 		if (null != layout && layout.getChildCount() > 0) {                 
@@ -78,11 +92,12 @@ public class TableSelect extends Activity {
 		        Button tableButton = (Button)v;
 		        String buttonText = tableButton.getText().toString();
 		        Intent intent = new Intent(v.getContext(), TableDetail.class);
-		        intent.putExtra("table", buttonText);
-		        intent.putExtra("index", tableButton.getTag().toString()); //get the array index somehow
+		        intent.putExtra("tableNumber", buttonText);
+		        intent.putExtra("tableIndex", Integer.parseInt(tableButton.getTag().toString())); //Tables index in the AL
+		        
 		        
 		      //debug message
-		    	Toast.makeText(getApplicationContext(), "Tag: " + tableButton.getTag().toString(), Toast.LENGTH_LONG).show();
+		    	Toast.makeText(getApplicationContext(), "Tag: " + tableButton.getTag().toString(), Toast.LENGTH_SHORT).show();
 		        
 		        startActivity(intent);
 		        
@@ -100,7 +115,7 @@ public class TableSelect extends Activity {
 			btn[i].setBackgroundResource(R.drawable.table);  // add image for kicks
 			btn[i].setTextColor(Color.WHITE);
 			btn[i].setTextSize(TypedValue.COMPLEX_UNIT_SP,32);
-			btn[i].setText(Integer.toString(tables.get(i).getTableNumber()));
+			btn[i].setText(Integer.toString(mySession.getTables().get(i).getTableNumber()));
 			btn[i].setOnClickListener(btnHandler);
 			btn[i].setTag(i);
 
