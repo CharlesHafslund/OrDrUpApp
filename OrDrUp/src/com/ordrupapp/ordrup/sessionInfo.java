@@ -21,10 +21,10 @@ private String username, password, sitecode;
 	private ArrayList<table> tables;
 
 	public boolean verify(String username, String password, String sitecode){
-
+		boolean valid = APIRequestor.login(username, password);
 		
 		//change this later to a API call
-		if(true){
+		if(valid){
 			setUsername(username);
 			setPassword(password);
 			setSitecode(sitecode);

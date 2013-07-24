@@ -1,6 +1,7 @@
 package com.ordrupapp.ordrup;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,9 @@ public class LoginScreen extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login_screen);
+		StrictMode.ThreadPolicy policy = new StrictMode.
+				ThreadPolicy.Builder().permitAll().build();
+				StrictMode.setThreadPolicy(policy); 
 	}
 
 	@Override

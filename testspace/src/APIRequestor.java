@@ -10,9 +10,207 @@ import java.net.URL;
 
 public class APIRequestor {
 
+	public static String login(String parameters){
 
+		HttpURLConnection connection;
+		URL url = null;
+		
+		try
+		{
+			url = new URL("http://www.ordrupapp.com/login?" + parameters);
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setDoOutput(true);
+
+			connection.setRequestMethod("GET");
+			connection.setUseCaches(false);
+			connection.setAllowUserInteraction(false);
+
+			//Connect
+			connection.connect();
+			
+			//get the connection status
+			int status = connection.getResponseCode();
+			
+			//debug message, display status
+			System.out.println("Status = " + status);
+
+			switch (status) {
+			case 200:
+				
+			case 201:
+							
+				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				StringBuilder sb = new StringBuilder();
+				String line;
+				while ((line = reader.readLine()) != null) {
+					sb.append(line+"\n");
+				}
+				reader.close();
+				
+				return sb.toString();
+			}
+		} catch (MalformedURLException ex) {
+			
+			System.out.println(ex.toString());
+		} catch (IOException ex) {
+			
+			System.out.println(ex.toString());
+		} 
+		
+		return null;
+	}
 
 	public static String get(String resource, String parameters){
+
+		HttpURLConnection connection;
+		URL url = null;
+		
+		try
+		{
+			url = new URL("http://api.ordrupapp.com/" + resource + "?" + parameters);
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setDoOutput(true);
+
+			connection.setRequestMethod("GET");
+			connection.setUseCaches(false);
+			connection.setAllowUserInteraction(false);
+
+			//Connect
+			connection.connect();
+			
+			//get the connection status
+			int status = connection.getResponseCode();
+			
+			//debug message, display status
+			System.out.println("Status = " + status);
+
+			switch (status) {
+			case 200:
+				
+			case 201:
+							
+				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				StringBuilder sb = new StringBuilder();
+				String line;
+				while ((line = reader.readLine()) != null) {
+					sb.append(line+"\n");
+				}
+				reader.close();
+				
+				return sb.toString();
+			}
+		} catch (MalformedURLException ex) {
+			
+			System.out.println(ex.toString());
+		} catch (IOException ex) {
+			
+			System.out.println(ex.toString());
+		} 
+		
+		return null;
+	}
+	
+	public static String post(String resource, String parameters){
+
+		HttpURLConnection connection;
+		URL url = null;
+		
+		try
+		{
+			url = new URL("http://api.ordrupapp.com/" + resource + "?" + parameters);
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setDoOutput(true);
+
+			connection.setRequestMethod("POST");
+			connection.setUseCaches(false);
+			connection.setAllowUserInteraction(false);
+
+			//Connect
+			connection.connect();
+			
+			//get the connection status
+			int status = connection.getResponseCode();
+			
+			//debug message, display status
+			System.out.println("Status = " + status);
+
+			switch (status) {
+			case 200:
+				
+			case 201:
+							
+				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				StringBuilder sb = new StringBuilder();
+				String line;
+				while ((line = reader.readLine()) != null) {
+					sb.append(line+"\n");
+				}
+				reader.close();
+				
+				return sb.toString();
+			}
+		} catch (MalformedURLException ex) {
+			
+			System.out.println(ex.toString());
+		} catch (IOException ex) {
+			
+			System.out.println(ex.toString());
+		} 
+		
+		return null;
+	}
+	
+	public static String update(String resource, String parameters){
+
+		HttpURLConnection connection;
+		URL url = null;
+		
+		try
+		{
+			url = new URL("http://api.ordrupapp.com/" + resource + "?" + parameters);
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setDoOutput(true);
+
+			connection.setRequestMethod("GET");
+			connection.setUseCaches(false);
+			connection.setAllowUserInteraction(false);
+
+			//Connect
+			connection.connect();
+			
+			//get the connection status
+			int status = connection.getResponseCode();
+			
+			//debug message, display status
+			System.out.println("Status = " + status);
+
+			switch (status) {
+			case 200:
+				
+			case 201:
+							
+				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				StringBuilder sb = new StringBuilder();
+				String line;
+				while ((line = reader.readLine()) != null) {
+					sb.append(line+"\n");
+				}
+				reader.close();
+				
+				return sb.toString();
+			}
+		} catch (MalformedURLException ex) {
+			
+			System.out.println(ex.toString());
+		} catch (IOException ex) {
+			
+			System.out.println(ex.toString());
+		} 
+		
+		return null;
+	}
+	
+	public static String delete(String resource, String parameters){
 
 		HttpURLConnection connection;
 		URL url = null;
