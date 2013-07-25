@@ -10,8 +10,19 @@ import android.widget.Toast;
 
 public class menuItem {
 	private int menuItemID;
-	private String name;
-	private double price;
+	private String name,Name;
+	private double price,Price;
+	private int RestaurantID;
+	private String Category;
+	
+	/*
+	 * Category: "Appetizer"
+MenuItemID: "158"
+Name: "Chips and Salsa"
+PrepTime: "4"
+Price: "5.99"
+RestaurantID: "22"
+	 */
 	
 	menuItem(int menuItemID, String name, double price){
 		this.menuItemID = menuItemID;

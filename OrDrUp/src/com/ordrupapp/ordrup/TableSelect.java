@@ -66,7 +66,7 @@ public class TableSelect extends Activity {
 		//Collections.sort(tables);
 		
 		//debug message
-    	Toast.makeText(getApplicationContext(), "SiteCode: " + mySession.getSitecode() + "\nUsername: " + mySession.getUsername() + "\nPassword: " + mySession.getPassword() + "\nTable Count: " + mySession.getTables().size(), Toast.LENGTH_LONG).show();
+    	//Toast.makeText(getApplicationContext(), menu.INSTANCE.getDebugST(), Toast.LENGTH_LONG).show();
     	
 		
 		

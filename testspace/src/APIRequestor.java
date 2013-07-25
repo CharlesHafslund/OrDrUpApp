@@ -6,10 +6,19 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 
 public class APIRequestor {
-
+	public final static int 	BEVERAGES = 0,
+								APPETIZERS = 1,
+								MAIN_COURSE = 2,
+								DESSERT = 3;
 	public static String login(String parameters){
 
 		HttpURLConnection connection;
@@ -59,6 +68,46 @@ public class APIRequestor {
 		
 		return null;
 	}
+	
+	public static ArrayList<ArrayList<menuItem>> jsonToMenuItemArray(String jsonAsString){
+		
+		ArrayList<ArrayList<menuItem>> myMenu = new ArrayList<ArrayList<menuItem>>(4);
+	    int cat, menuItemID;
+    	String catString, name;
+    	Double price;
+		
+    	for( int i = 0; i < 4; i++) {
+    		myMenu.add(new ArrayList<menuItem>());
+    	}
+		
+		JsonElement jelement = new JsonParser().parse(jsonAsString);
+		JsonObject  jobject = jelement.getAsJsonObject();
+	    JsonArray jarray = jobject.getAsJsonArray("data");
+	        
+    	
+	    for (int i = 0; i < jarray.size(); i++){
+	    	
+	    	//unpack data from the json object
+	    	catString = jarray.get(i).getAsJsonObject().get("Category").toString().replace("\"", "");
+	    	menuItemID = jarray.get(i).getAsJsonObject().get("MenuItemID").getAsInt();
+	    	name = jarray.get(i).getAsJsonObject().get("Name").toString().replace("\"", "");;
+	    	price = jarray.get(i).getAsJsonObject().get("Price").getAsDouble();
+	    	
+	    	//set the menu category
+	    	if (catString.equals("Beverage")) cat = BEVERAGES;
+	    	else if (catString.equals("Appetizer")) cat = APPETIZERS;
+	    	else if (catString.equals("Main Course")) cat = MAIN_COURSE;
+	    	else if (catString.equals("Dessert")) cat = DESSERT;
+	    	else cat = -1;
+	    	
+	    	//add the item to the proper sub menu
+	    	myMenu.get(cat).add(new menuItem(menuItemID, name, price));
+	    	    	
+	    }
+	    
+	    //return the competed menu	    
+	    return myMenu;
+	}
 
 	public static String get(String resource, String parameters){
 
@@ -82,6 +131,7 @@ public class APIRequestor {
 			int status = connection.getResponseCode();
 			
 			//debug message, display status
+			System.out.println("URL = " + url.toString());
 			System.out.println("Status = " + status);
 
 			switch (status) {

@@ -2,7 +2,11 @@ package com.ordrupapp.ordrup;
 
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+
 import android.app.Application;
+import android.os.StrictMode;
+import android.widget.Toast;
 
 public enum menu{
 	INSTANCE;
@@ -11,12 +15,11 @@ public enum menu{
 						MAIN_COURSE = 2,
 						DESSERT = 3;
 	
-	//private int timestamp;  //possibly use for timestamping the menu
-	
 	private ArrayList<menuItem> beverages = new ArrayList<menuItem>(), 
 								appetizers = new ArrayList<menuItem>(),
 								mainCourse = new ArrayList<menuItem>(),
 								dessert = new ArrayList<menuItem>();
+	private String debugST;
 			
 	public ArrayList<menuItem> getMenuItemList(int type){
 		
@@ -37,31 +40,28 @@ public enum menu{
 	}
 	
 	public void updateMenu(){
-		//this will eventually be an API call to get the items and add them in
-		
+				
 		beverages.clear();
-		beverages.add(new menuItem(111, "Pop", 2.99));
-		beverages.add(new menuItem(112, "Beer", 4.99));
-		beverages.add(new menuItem(113, "Wine - LeCheapo DeLaBoxo (Glass)", 3.99));
-		beverages.add(new menuItem(114, "Tall Glass STFU", 0.00));
-		
 		appetizers.clear();
-		appetizers.add(new menuItem(114, "Lamb Fries", 6.99));
-		appetizers.add(new menuItem(115, "Surprise Item", 5.99));
-		appetizers.add(new menuItem(116, "Leftover Mishmash", 4.99));
-		
 		mainCourse.clear();
-		mainCourse.add(new menuItem(117, "Hamburger", 6.99));
-		mainCourse.add(new menuItem(118, "Chicken Fingers", 6.99));
-		mainCourse.add(new menuItem(119, "Lutefisk Hotdish", 6.99));
-		mainCourse.add(new menuItem(120, "Block o' Spam", 6.99));
-		
 		dessert.clear();
-		dessert.add(new menuItem(121, "Super Brownies", 6.99));
-		dessert.add(new menuItem(122, "Not So Super Brownies", 5.99));
-		dessert.add(new menuItem(123, "Just A Brownie", 4.99));
-		dessert.add(new menuItem(124, "Bag of Brownie Mix", 3.99));
+		String jsonReq = APIRequestor.get("menuItem", "");
+		
+		//this is null for some reason
+		debugST = jsonReq;
+		//APIRequestor.jsonToMenuItemArray(jsonReq);
+//		ArrayList<ArrayList<menuItem>> myMenu = 
+//				(ArrayList<ArrayList<menuItem>>) APIRequestor.jsonToMenuItemArray(jsonReq).clone();
+//		beverages = (ArrayList<menuItem>) myMenu.get(BEVERAGES).clone();
+//		appetizers = (ArrayList<menuItem>) myMenu.get(APPETIZERS).clone();
+//		mainCourse = (ArrayList<menuItem>) myMenu.get(MAIN_COURSE).clone();
+//		dessert = (ArrayList<menuItem>) myMenu.get(DESSERT).clone();
 		
 	}
+
+	public String getDebugST() {
+		return debugST;
+	}
+
 
 }

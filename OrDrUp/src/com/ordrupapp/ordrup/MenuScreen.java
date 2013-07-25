@@ -3,6 +3,7 @@ package com.ordrupapp.ordrup;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -48,7 +49,10 @@ public class MenuScreen extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu_screen);
-
+		StrictMode.ThreadPolicy policy = new StrictMode.
+				ThreadPolicy.Builder().permitAll().build();
+				StrictMode.setThreadPolicy(policy);
+		
 		// Set up the action bar to show a dropdown list.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setTitle("Menu");

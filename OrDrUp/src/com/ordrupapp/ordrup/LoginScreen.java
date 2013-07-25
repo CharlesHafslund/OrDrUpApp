@@ -34,18 +34,11 @@ public class LoginScreen extends Activity {
 	    String username = ((EditText) findViewById(R.id.username_message)).getText().toString();
 	    String password = ((EditText) findViewById(R.id.password_message)).getText().toString();
 	    sessionInfo mySession = sessionInfo.getInstance();
-	    menu myMenu = menu.INSTANCE; //((menu)this.getApplication());
+	    menu myMenu = menu.INSTANCE;
 	    
 	    validLogin = mySession.verify(username.toString(), password.toString(), sitecode.toString());
 	    
 	    if (validLogin){
-	    	
-	    	//mySession.setUsername(username.getText().toString());
-	    	//mySession.setPasswordHash(password.getText().toString());
-	    	//mySession.setSitecode(sitecode);
-	    	
-	    	//debug message
-	    	Toast.makeText(getApplicationContext(), "SiteCode: " + mySession.getSitecode() + "\nUsername: " + mySession.getUsername() + "\nPassword: " + mySession.getPassword(), Toast.LENGTH_SHORT).show();
 	    	
 	    	//get the menu from the server
 	    	myMenu.updateMenu();
