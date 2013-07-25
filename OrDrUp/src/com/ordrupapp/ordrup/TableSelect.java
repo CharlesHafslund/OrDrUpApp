@@ -50,18 +50,21 @@ public class TableSelect extends Activity {
 		
 		
 		
-		//need to make a call here to get tables from API, this should be a find and add it not exist
+		
 		//if exist in API request and current list, add existing table to dummy
 		//if exist in API and not in current list, add new table to dummy
 		//else ignore
 		//point tables to dummy
+		
+		//get the updated list of tables from the server
 		ArrayList<table> newTables = APIRequestor.jsonToTableArray(APIRequestor.get("table", ""));
 		
-//		for (int i = 0; i < newTables.size(); i++){
-//			if (mySession.getTables().contains(newTables.get(i))) //skip
-//		}
+		for (int i = 0; i < newTables.size(); i++){
+			if (mySession.getTables().contains(newTables.get(i))); //skip
+			else mySession.getTables().add(newTables.get(i));  //new table, add it
+		}
 		
-		mySession.getTables().addAll(APIRequestor.jsonToTableArray(APIRequestor.get("table", "")));
+		//mySession.getTables().addAll(APIRequestor.jsonToTableArray(APIRequestor.get("table", "")));
 		
 		
 //		mySession.getTables().add(new table(111,1));
@@ -72,7 +75,7 @@ public class TableSelect extends Activity {
 		
 		
 		//sort the tables for easy viewing
-		//Collections.sort(tables);
+		Collections.sort(mySession.getTables());
 		
 		//debug message
     	//Toast.makeText(getApplicationContext(), menu.INSTANCE.getDebugST(), Toast.LENGTH_LONG).show();

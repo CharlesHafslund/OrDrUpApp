@@ -69,4 +69,9 @@ public class table implements Comparable {
 		    return this.getTableNumber() - anotherTableNumber;  
 	}
 	
+	  @Override
+	  public boolean equals(Object v) {
+		  if (this.getTableNumber()  == ((table) v).getTableNumber()) return true;
+		  else return false;
+	  }
 }
