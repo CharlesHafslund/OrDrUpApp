@@ -11,6 +11,17 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.util.EntityUtils;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -50,7 +61,7 @@ public class APIRequestor {
 			//debug message, display status
 			System.out.println("Login URL = " + url.toString());
 			System.out.println("Status = " + status);
-			connection.disconnect();
+			//connection.disconnect();
 			if (status == 202) {
 
 				return true;
@@ -71,24 +82,24 @@ public class APIRequestor {
 
 
 	public static String get(String resource, String parameters){
-
+		/*
 		HttpURLConnection connection;
 		URL url = null;
 
 		try
 		{
+			
 			//build the url and open the connection
 			url = new URL("http://api.ordrupapp.com/" + resource + "?auth_Username=" + sessionInfo.getInstance().getUsername() + "&auth_Password=" + sessionInfo.getInstance().getPassword() + parameters);
-			
-			
 			connection = (HttpURLConnection) url.openConnection();
 			connection.setDoOutput(true);
-
+			
 			connection.setRequestMethod("GET");
 			connection.setUseCaches(false);
-			connection.setAllowUserInteraction(false);
+			//connection.setAllowUserInteraction(false);
 			
-			connection.addRequestProperty("User-Agent", "Mozilla/4.0");
+			//connection.addRequestProperty("User-Agent", "Mozilla/4.0");
+			//connection.addRequestProperty("User-Agent", "Mozilla/4.76");
 			
 			//Connect
 			connection.connect();
@@ -97,10 +108,10 @@ public class APIRequestor {
 			int status = connection.getResponseCode();
 			
 			//debug message, display status
-			System.out.println("URL = " + url.toString());
+			System.out.println("URL = " + connection.getURL());
 			System.out.println("Get Status = " + status);
 			System.out.println("Msg = " + connection.getResponseMessage());
-			connection.disconnect();
+			//connection.disconnect();
 			switch (status) {
 			case 200:
 
@@ -124,11 +135,47 @@ public class APIRequestor {
 			System.out.println(ex.toString());
 		} 
 
-		return null;
+		return null; */
+			int TIMEOUT = 2000;
+		    String url2= "http://api.ordrupapp.com/" + resource + "?auth_Username=" + sessionInfo.getInstance().getUsername() + "&auth_Password=" + sessionInfo.getInstance().getPassword() + parameters;
+		    HttpParams httpParameters = new BasicHttpParams();
+		    // Set the timeout in milliseconds until a connection is established.
+		    HttpConnectionParams.setConnectionTimeout(httpParameters, TIMEOUT);
+		    HttpClient hc = new DefaultHttpClient(httpParameters);
+
+		    // which HTTP request: GET or POST ?
+		    //HttpPost post = new HttpPost(url);
+		    HttpGet get = new HttpGet(url2);
+
+		    HttpResponse rp = null;
+			try {
+				rp = hc.execute(get);
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    // example to show the result as a string
+		    String resultAsString = null;
+			try {
+				resultAsString = EntityUtils.toString(rp.getEntity());
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+			
+			
+			return resultAsString;
 	}
 
 	public static ArrayList<ArrayList<menuItem>> jsonToMenuItemArray(String jsonAsString){
-
+		System.out.println("##############  Parsing.....  ##############");
+		System.out.println(jsonAsString);
 		ArrayList<ArrayList<menuItem>> myMenu = new ArrayList<ArrayList<menuItem>>(4);
 		int cat, menuItemID;
 		String catString, name;

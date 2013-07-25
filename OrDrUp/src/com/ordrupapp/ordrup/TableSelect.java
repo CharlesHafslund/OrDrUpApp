@@ -43,6 +43,8 @@ public class TableSelect extends Activity {
 	
 	public void getTables(View view) {
 		
+		
+		
 		//get a reference to the session info
 		sessionInfo mySession = sessionInfo.getInstance();
 		

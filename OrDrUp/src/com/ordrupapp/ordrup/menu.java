@@ -45,17 +45,15 @@ public enum menu{
 		appetizers.clear();
 		mainCourse.clear();
 		dessert.clear();
-		String jsonReq = APIRequestor.get("menuItem", "");
+		//String jsonReq = APIRequestor.get("menuItem", "");
 		
-		//this is null for some reason
-		debugST = jsonReq;
-		//APIRequestor.jsonToMenuItemArray(jsonReq);
+		ArrayList<ArrayList<menuItem>> myMenu = (ArrayList<ArrayList<menuItem>>) APIRequestor.jsonToMenuItemArray(APIRequestor.get("menuItem", ""));
 //		ArrayList<ArrayList<menuItem>> myMenu = 
 //				(ArrayList<ArrayList<menuItem>>) APIRequestor.jsonToMenuItemArray(jsonReq).clone();
-//		beverages = (ArrayList<menuItem>) myMenu.get(BEVERAGES).clone();
-//		appetizers = (ArrayList<menuItem>) myMenu.get(APPETIZERS).clone();
-//		mainCourse = (ArrayList<menuItem>) myMenu.get(MAIN_COURSE).clone();
-//		dessert = (ArrayList<menuItem>) myMenu.get(DESSERT).clone();
+		beverages = (ArrayList<menuItem>) myMenu.get(BEVERAGES).clone();
+		appetizers = (ArrayList<menuItem>) myMenu.get(APPETIZERS).clone();
+		mainCourse = (ArrayList<menuItem>) myMenu.get(MAIN_COURSE).clone();
+		dessert = (ArrayList<menuItem>) myMenu.get(DESSERT).clone();
 		
 	}
 

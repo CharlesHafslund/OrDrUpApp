@@ -52,7 +52,7 @@ public class MenuScreen extends FragmentActivity implements
 		StrictMode.ThreadPolicy policy = new StrictMode.
 				ThreadPolicy.Builder().permitAll().build();
 				StrictMode.setThreadPolicy(policy);
-		
+
 		// Set up the action bar to show a dropdown list.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setTitle("Menu");
