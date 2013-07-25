@@ -57,9 +57,9 @@ public class TableSelect extends Activity {
 		//point tables to dummy
 		ArrayList<table> newTables = APIRequestor.jsonToTableArray(APIRequestor.get("table", ""));
 		
-		for (int i = 0; i < newTables.size(); i++){
-			
-		}
+//		for (int i = 0; i < newTables.size(); i++){
+//			if (mySession.getTables().contains(newTables.get(i))) //skip
+//		}
 		
 		mySession.getTables().addAll(APIRequestor.jsonToTableArray(APIRequestor.get("table", "")));
 		
