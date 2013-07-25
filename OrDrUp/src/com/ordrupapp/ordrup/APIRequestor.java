@@ -169,13 +169,15 @@ public class APIRequestor {
 				e.printStackTrace();
 			}	
 			
+			System.out.println("###################### Result ######################");
+			System.out.println(resultAsString);
+			System.out.println("####################################################");
 			
 			return resultAsString;
 	}
 
 	public static ArrayList<ArrayList<menuItem>> jsonToMenuItemArray(String jsonAsString){
-		System.out.println("##############  Parsing.....  ##############");
-		System.out.println(jsonAsString);
+		
 		ArrayList<ArrayList<menuItem>> myMenu = new ArrayList<ArrayList<menuItem>>(4);
 		int cat, menuItemID;
 		String catString, name;
@@ -214,6 +216,30 @@ public class APIRequestor {
 		return myMenu;
 	}
 
+public static ArrayList<table> jsonToTableArray(String jsonAsString){
+		
+		ArrayList<table> myTables = new ArrayList<table>();
+		int tableNumber, tableID;
+		
+		JsonElement jelement = new JsonParser().parse(jsonAsString);
+		JsonObject  jobject = jelement.getAsJsonObject();
+		JsonArray jarray = jobject.getAsJsonArray("data");
+
+
+		for (int i = 0; i < jarray.size(); i++){
+
+			//unpack data from the json object
+			
+			tableID = jarray.get(i).getAsJsonObject().get("TableID").getAsInt();
+			tableNumber = jarray.get(i).getAsJsonObject().get("Number").getAsInt();
+						//add the item to the proper sub menu
+			myTables.add(new table(tableID, tableNumber));
+
+		}
+
+		//return the table list	    
+		return myTables;
+	}
 
 
 }

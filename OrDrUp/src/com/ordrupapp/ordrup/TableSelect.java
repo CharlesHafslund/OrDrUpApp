@@ -55,13 +55,20 @@ public class TableSelect extends Activity {
 		//if exist in API and not in current list, add new table to dummy
 		//else ignore
 		//point tables to dummy
+		ArrayList<table> newTables = APIRequestor.jsonToTableArray(APIRequestor.get("table", ""));
+		
+		for (int i = 0; i < newTables.size(); i++){
+			
+		}
+		
+		mySession.getTables().addAll(APIRequestor.jsonToTableArray(APIRequestor.get("table", "")));
 		
 		
-		mySession.getTables().add(new table(111,1));
-		
-		mySession.getTables().add(new table(113,7));
-		mySession.getTables().add(new table(131,9));
-		mySession.getTables().add(new table(121,2));
+//		mySession.getTables().add(new table(111,1));
+//		
+//		mySession.getTables().add(new table(113,7));
+//		mySession.getTables().add(new table(131,9));
+//		mySession.getTables().add(new table(121,2));
 		
 		
 		//sort the tables for easy viewing
