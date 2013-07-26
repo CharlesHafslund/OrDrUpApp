@@ -175,6 +175,27 @@ public class APIRequestor {
 			
 			return resultAsString;
 	}
+	
+	public static int getMyUserID(){
+		String userInfo = get("user", "");
+		int userID = 0;
+		
+		
+		JsonElement jelement = new JsonParser().parse(userInfo);
+		JsonObject  jobject = jelement.getAsJsonObject();
+		JsonArray jarray = jobject.getAsJsonArray("data");
+		
+		for (int i = 0; i < jarray.size(); i++){
+			if (jarray.get(i).getAsJsonObject().get("Username").getAsString().equals(sessionInfo.getInstance().getUsername())){
+				userID = jarray.get(i).getAsJsonObject().get("UserID").getAsInt();
+			}
+		}
+		
+		
+		System.out.println("############ My user id is : " + userID);
+		return userID;
+		
+	}
 
 	public static ArrayList<ArrayList<menuItem>> jsonToMenuItemArray(String jsonAsString){
 		

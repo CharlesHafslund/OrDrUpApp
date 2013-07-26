@@ -18,6 +18,7 @@ public enum sessionInfo{
 
 	
 private String username, password, sitecode;
+private int userid;
 	private ArrayList<table> tables;
 
 	public boolean verify(String username, String password, String sitecode){
@@ -28,6 +29,7 @@ private String username, password, sitecode;
 			setUsername(username);
 			setPassword(password);
 			setSitecode(sitecode);
+			setUserID(APIRequestor.getMyUserID());
 			tables = new ArrayList<table>();
 			return true;
 		}
@@ -93,6 +95,14 @@ private String username, password, sitecode;
 		}
 
 		return false;
+	}
+
+	public int getUserID() {
+		return userid;
+	}
+
+	public void setUserID(int userid) {
+		this.userid = userid;
 	}
 
 }
