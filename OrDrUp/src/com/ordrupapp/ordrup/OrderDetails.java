@@ -27,6 +27,8 @@ public class OrderDetails extends Activity {
 			//String table = extras.getString("tableNumber");
 			currentTableIndex = extras.getInt("tableIndex");
 			orderNumber = extras.getInt("orderNumber");
+			System.out.println("TID = " + currentTableIndex);
+			System.out.println("ON = " + orderNumber);
 			//tableNumberText.setText(table);
 			
 	
@@ -83,10 +85,19 @@ public class OrderDetails extends Activity {
 		
 		TextView orderItemName;
 		
+		System.out.println("TID = " + currentTableIndex);
+		System.out.println("ON = " + orderNumber);
 		for (int i = 0; i < mySession.getTables().get(currentTableIndex).getOrders().get(orderNumber).getOrderItemCount(); i++){
+			System.out.println("Trying to add an order item");
 			orderItemName = new TextView(view.getContext());
-			orderItemName.setText(mySession.getTables().get(currentTableIndex).getOrders().get(orderNumber).getOrderItems().get(i).getName());
-			layout.addView(orderItemName);
+			orderItemName.setText ("hello");
+			mySession.getTables()
+											.get(currentTableIndex)
+											.getOrders()
+											.get(orderNumber)
+											.getOrderItems()
+											.get(i).getName();
+			//layout.addView(orderItemName);
 		}
 		
 	}

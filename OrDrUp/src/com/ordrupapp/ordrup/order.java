@@ -17,6 +17,13 @@ public class order {
 		orderItems.add(new orderItem(menuItemID));
 	}
 	
+	public void addOrderItem(int category, int menuItemIndex){
+		orderItems.add(new orderItem(menu.INSTANCE.getMenuItemList(category).get(menuItemIndex).getMenuItemID(), 
+									 menu.INSTANCE.getMenuItemList(category).get(menuItemIndex).getName(), 
+									 menu.INSTANCE.getMenuItemList(category).get(menuItemIndex).getPrice()));
+		//orderItem(int menuItemID, String name, float price)
+	}
+	
 	
 	//remove?
 	public void addOrderItem(int menuItemID, String name, float price){

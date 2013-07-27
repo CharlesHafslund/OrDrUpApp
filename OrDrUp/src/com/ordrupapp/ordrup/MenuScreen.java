@@ -212,7 +212,7 @@ public class MenuScreen extends FragmentActivity implements
 			    public void onClick(View v) {
 			        
 			        String[] tags = (String[]) v.getTag();
-			        
+			        System.out.println("Table index " + tags[0] + " has added to order index " + tags[1] + " an order item of type " + tags[2] + " of order item index " + tags[3] +"." );
 			        sessionInfo.getInstance().
 			        			getTables().									//from my list of tables
 			        			get(Integer.parseInt(tags[0])).					//for the current table
@@ -239,7 +239,8 @@ public class MenuScreen extends FragmentActivity implements
 				vNotes.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
 				
 				addItem = new Button(container.getContext());
-				addItem.setBackgroundResource(R.drawable.add_button);
+				//addItem.setBackgroundResource(R.drawable.add_button);
+				addItem.setText("+");
 				addItem.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
 				tag[MENU_INDEX] = Integer.toString(i);
 				addItem.setTag(tag.clone());

@@ -1,12 +1,13 @@
 package com.ordrupapp.ordrup;
 
+/*
+ * This is an object to hold an instance of a menuItem that has
+ * been added to a specific order
+ */
 public class orderItem {
 	private String name,notes;
-	private float price;
-	int menuItemID, orderItemID;//, orderID;
-	
-	//is orderID needed here?
-	//no can be slipped inline when the order is submitted
+	private double price;
+	int menuItemID, orderItemID;
 	
 	orderItem(int menuItemID){
 		this.menuItemID = menuItemID;
@@ -14,15 +15,16 @@ public class orderItem {
 	}
 	
 	//constructor without orderitem notes
-	orderItem(int menuItemID, String name, float price){
+	orderItem(int menuItemID, String name, double price){
+		
 		this(menuItemID, name, price, "");
 	}
 	
 	
 	//constructor with notes
-	orderItem(int menuItemID, String name, float price, String notes){
+	orderItem(int menuItemID, String name, double price, String notes){
+		System.out.println("Adding " + menuItemID + " " + name + " " + price);
 		this.menuItemID = menuItemID;
-		//this.orderID = orderID;
 		this.name = name.toString();
 		this.price = price;
 		this.notes = notes.toString();
@@ -40,7 +42,7 @@ public class orderItem {
 		return name.toString();
 	}
 	
-	public float getPrice(){
+	public double getPrice(){
 		return price;
 	}
 	

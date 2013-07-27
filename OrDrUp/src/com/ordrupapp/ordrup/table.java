@@ -30,18 +30,18 @@ public class table implements Comparable {
 		return tableOrders;
 	}
 	
-	public void addOrderItem(int orderNumber, int menuItemID){
-		int orderIndex = orderNumber-1;
-		if (orderIndex < tableOrders.size()){
-			tableOrders.get(orderIndex).addOrderItem(menuItemID);
-		}
-	}
-	
-	public void addOrderItem(int orderNumber, int sectionID, int menuItemID){
+//	public void addOrderItem(int orderIndex, int menuItemID){
 //		int orderIndex = orderNumber-1;
 //		if (orderIndex < tableOrders.size()){
 //			tableOrders.get(orderIndex).addOrderItem(menuItemID);
 //		}
+//	}
+	
+	public void addOrderItem(int orderIndex, int sectionID, int menuItemID){
+		//int orderIndex = orderNumber-1;
+		//if (orderIndex < tableOrders.size()){
+			tableOrders.get(orderIndex).addOrderItem(sectionID,menuItemID);
+		//}
 		
 		//fix this
 		
