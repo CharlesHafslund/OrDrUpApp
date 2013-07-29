@@ -2,9 +2,12 @@ package com.ordrupapp.ordrup;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
@@ -12,7 +15,7 @@ import android.support.v4.app.NavUtils;
 public class OrderDetails extends Activity {
 	
 	
-	LinearLayout layout;
+	GridLayout layout;
 	int orderNumber, currentTableIndex;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,17 +26,10 @@ public class OrderDetails extends Activity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 
-			//TextView tableNumberText = (TextView) findViewById(R.id.table_details_number);
-			//String table = extras.getString("tableNumber");
 			currentTableIndex = extras.getInt("tableIndex");
 			orderNumber = extras.getInt("orderNumber");
-			System.out.println("TID = " + currentTableIndex);
-			System.out.println("ON = " + orderNumber);
-			//tableNumberText.setText(table);
 			
-	
-
-		getOrderItems((View)findViewById(R.id.order_details_list));
+			getOrderItems((View)findViewById(R.id.order_details_list));
 		}
 	}
 
@@ -73,31 +69,58 @@ public class OrderDetails extends Activity {
 	public void getOrderItems(View view){
 		sessionInfo mySession = sessionInfo.getInstance();
 		
-		if (null != layout && layout.getChildCount() > 0) {                 
-			try {
-				layout.removeViews (0, layout.getChildCount());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		GridLayout layout = (GridLayout) view.findViewById(R.id.order_details_list);
 		
-		layout = (LinearLayout) findViewById(R.id.order_details_list);
+		//clear the view
+		layout.removeAllViews();
 		
+		layout.setColumnCount(2);
+		
+		//declare the fields
 		TextView orderItemName;
+		Button removeItem;
+		TextView orderItemNotes;
+		String orderItemNotesString;
 		
-		System.out.println("TID = " + currentTableIndex);
-		System.out.println("ON = " + orderNumber);
 		for (int i = 0; i < mySession.getTables().get(currentTableIndex).getOrders().get(orderNumber).getOrderItemCount(); i++){
-			System.out.println("Trying to add an order item");
+						
+			//add the remove button
+			removeItem = new Button(view.getContext());
+			removeItem.setText("-");
+			removeItem.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
+			layout.addView(removeItem);
+			
+			//get the name
 			orderItemName = new TextView(view.getContext());
-			orderItemName.setText ("hello");
-			mySession.getTables()
+			orderItemName.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
+			orderItemName.setText (
+						mySession.getTables()
 											.get(currentTableIndex)
 											.getOrders()
 											.get(orderNumber)
 											.getOrderItems()
-											.get(i).getName();
-			//layout.addView(orderItemName);
+											.get(i).getName());
+			layout.addView(orderItemName);
+			
+			//get the notes
+			orderItemNotesString = mySession.getTables()
+					.get(currentTableIndex)
+					.getOrders()
+					.get(orderNumber)
+					.getOrderItems()
+					.get(i)
+					.getNotes();
+			
+			orderItemNotes = new TextView(view.getContext());
+			orderItemNotes.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
+			
+			//add a dash if there are notes
+			if (!orderItemNotesString.isEmpty()) orderItemNotes.setText(" - " + orderItemNotesString);
+			
+			//else add the empty string
+			else orderItemNotes.setText(orderItemNotesString);
+			
+			
 		}
 		
 	}

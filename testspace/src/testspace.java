@@ -35,7 +35,8 @@ public class testspace {
 		 
 		
 		//add (create) order request
-		//System.out.println("Order : "+ APIRequestor.post("order", "auth_Username=q.tip&auth_Password=password&TableID=106"));
+		System.out.println("Order : "+ APIRequestor.post("order", "auth_Username=q.tip&auth_Password=password&TableID=6"));
+		System.out.println(APIRequestor.get("order", "auth_Username=q.tip&auth_Password=password&TableID=6"));
 		
 		//add (create) orderitem to order request
 		//System.out.println("OrderItem : "+ APIRequestor.post("orderitem", "auth_Username=q.tip&auth_Password=password&OrderID=106&MenuItemID&PurchasePrice=1.99"));

@@ -7,22 +7,36 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".OrderDetails" >
+	<TextView
+        android:id="@+id/order_details_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Order "
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/order_details_submit_order_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:onClick=""
+        android:text="@string/order_details_submit_order_button" />
 
     <ScrollView
         android:id="@+id/order_details_list_scrollview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" >
+        android:layout_alignLeft="@+id/order_details_title"
+        android:layout_below="@+id/order_details_title" >
 
-        <LinearLayout
+        <GridLayout
             android:id="@+id/order_details_list"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-        </LinearLayout>
+            android:layout_height="wrap_content" >
+        </GridLayout>
     </ScrollView>
 
 </RelativeLayout>

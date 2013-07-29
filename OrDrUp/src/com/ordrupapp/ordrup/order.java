@@ -3,13 +3,13 @@ package com.ordrupapp.ordrup;
 import java.util.ArrayList;
 
 public class order {
-	private int orderID, tableOrderID;
+	//private int orderID, tableOrderID;
 	private ArrayList<orderItem> orderItems;
 	private int status;
 	
-	order(int tableOrderID){
+	order(){
 		//set the table order id
-		this.tableOrderID = tableOrderID;
+		//this.tableOrderID = tableOrderID;
 		orderItems = new ArrayList<orderItem>();
 	}
 	

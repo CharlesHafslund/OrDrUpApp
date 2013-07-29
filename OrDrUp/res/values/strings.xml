@@ -21,5 +21,6 @@
     <string name="title_section_main_course">Main Course</string>
     <string name="title_section_dessert">Deserts</string>
     <string name="title_activity_order_details">OrderDetails</string>
+	<string name="order_details_submit_order_button">Submit</string>
 
 </resources>

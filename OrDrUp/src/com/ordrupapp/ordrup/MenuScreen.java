@@ -72,23 +72,12 @@ public class MenuScreen extends FragmentActivity implements
 					getString(R.string.title_section_main_course),
 					getString(R.string.title_section_dessert),}), this);
 		//set the table number and order number for the screen
-//		Bundle extras = getIntent().getExtras();
-		
-//		orderNumber = getIntent().getIntExtra("orderNumber", -1);
-//		currentTableIndex = getIntent().getIntExtra("tableIndex", -1);
-		
+
+		currentTableIndex = getIntent().getIntExtra("table", 0);
+		orderNumber =  getIntent().getIntExtra("orderNumber", 0);
+
 		tag[TABLE_INDEX] = Integer.toString(currentTableIndex);
 		tag[ORDER_NUMBER] = Integer.toString(orderNumber);
-		
-		
-		
-//		if (extras != null) {
-//
-//			currentTableIndex =  extras.getInt("tableIndex");
-//			orderNumber = extras.getInt("orderNumber");
-//			
-//			//Integer to get a static?
-//		}
 	}
 	
 	/**

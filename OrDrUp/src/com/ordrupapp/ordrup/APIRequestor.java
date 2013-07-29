@@ -16,6 +16,7 @@ import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
@@ -82,60 +83,7 @@ public class APIRequestor {
 
 
 	public static String get(String resource, String parameters){
-		/*
-		HttpURLConnection connection;
-		URL url = null;
-
-		try
-		{
-			
-			//build the url and open the connection
-			url = new URL("http://api.ordrupapp.com/" + resource + "?auth_Username=" + sessionInfo.getInstance().getUsername() + "&auth_Password=" + sessionInfo.getInstance().getPassword() + parameters);
-			connection = (HttpURLConnection) url.openConnection();
-			connection.setDoOutput(true);
-			
-			connection.setRequestMethod("GET");
-			connection.setUseCaches(false);
-			//connection.setAllowUserInteraction(false);
-			
-			//connection.addRequestProperty("User-Agent", "Mozilla/4.0");
-			//connection.addRequestProperty("User-Agent", "Mozilla/4.76");
-			
-			//Connect
-			connection.connect();
-
-			//get the connection status
-			int status = connection.getResponseCode();
-			
-			//debug message, display status
-			System.out.println("URL = " + connection.getURL());
-			System.out.println("Get Status = " + status);
-			System.out.println("Msg = " + connection.getResponseMessage());
-			//connection.disconnect();
-			switch (status) {
-			case 200:
-
-			case 201:
-
-				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-				StringBuilder sb = new StringBuilder();
-				String line;
-				while ((line = reader.readLine()) != null) {
-					sb.append(line+"\n");
-				}
-				reader.close();
-
-				return sb.toString();
-			}
-		} catch (MalformedURLException ex) {
-
-			System.out.println(ex.toString());
-		} catch (IOException ex) {
-
-			System.out.println(ex.toString());
-		} 
-
-		return null; */
+		
 			int TIMEOUT = 2000;
 		    String url2= "http://api.ordrupapp.com/" + resource + "?auth_Username=" + sessionInfo.getInstance().getUsername() + "&auth_Password=" + sessionInfo.getInstance().getPassword() + parameters;
 		    HttpParams httpParameters = new BasicHttpParams();
@@ -175,6 +123,50 @@ public class APIRequestor {
 			
 			return resultAsString;
 	}
+	
+	
+	public static String post(String resource, String parameters){
+		
+		int TIMEOUT = 2000;
+	    String url2= "http://api.ordrupapp.com/" + resource + "?auth_Username=" + sessionInfo.getInstance().getUsername() + "&auth_Password=" + sessionInfo.getInstance().getPassword() + parameters;
+	    HttpParams httpParameters = new BasicHttpParams();
+	    // Set the timeout in milliseconds until a connection is established.
+	    HttpConnectionParams.setConnectionTimeout(httpParameters, TIMEOUT);
+	    HttpClient hc = new DefaultHttpClient(httpParameters);
+
+	    // which HTTP request: GET or POST ?
+	    HttpPost post = new HttpPost(url2);
+	    //HttpGet get = new HttpGet(url2);
+
+	    HttpResponse rp = null;
+		try {
+			rp = hc.execute(post);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    // example to show the result as a string
+	    String resultAsString = null;
+		try {
+			resultAsString = EntityUtils.toString(rp.getEntity());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		
+		System.out.println("###################### Result ######################");
+		System.out.println(resultAsString);
+		System.out.println("####################################################");
+		
+		return resultAsString;
+}
+	
 	
 	public static int getMyUserID(){
 		String userInfo = get("user", "");

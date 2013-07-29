@@ -14,8 +14,9 @@ public class table implements Comparable {
 	}
 	
 	public int addOrder(){
-		tableOrders.add(new order(tableOrders.size()+1));
-		return tableOrders.size(); //return the order number
+		tableOrders.add(new order());
+		System.out.println("-------- table order size is now " + tableOrders.size());
+		return tableOrders.size() - 1; //return the order number index
 	}
 	
 	public int getTableID(){
@@ -38,14 +39,8 @@ public class table implements Comparable {
 //	}
 	
 	public void addOrderItem(int orderIndex, int sectionID, int menuItemID){
-		//int orderIndex = orderNumber-1;
-		//if (orderIndex < tableOrders.size()){
-			tableOrders.get(orderIndex).addOrderItem(sectionID,menuItemID);
-		//}
-		
-		//fix this
-		
-		
+
+			tableOrders.get(orderIndex).addOrderItem(sectionID,menuItemID);	
 	}
 	
 	public int getOrderCount(){

@@ -47,6 +47,8 @@ public class LoginScreen extends Activity {
 	    	EditText editText = (EditText) findViewById(R.id.username_message);
 	    	String message = editText.getText().toString();
 	    	intent.putExtra(EXTRA_MESSAGE, message);
+	    	
+	    		    	
 	    	startActivity(intent);
 	    }
 	    else {
