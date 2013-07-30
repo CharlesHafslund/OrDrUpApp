@@ -30,6 +30,15 @@ public class OrderDetails extends Activity {
 			orderNumber = extras.getInt("orderNumber");
 			
 			getOrderItems((View)findViewById(R.id.order_details_list));
+			
+			//Make the button invisible and unclickable if the order has been submitted
+			if (sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).wasSubmitted()){
+				((Button)findViewById(R.id.order_details_submit_order_button)).setClickable(false);
+				((Button)findViewById(R.id.order_details_submit_order_button)).setVisibility(Button.INVISIBLE);
+			}
+			
+			
+			
 		}
 	}
 
@@ -82,13 +91,35 @@ public class OrderDetails extends Activity {
 		TextView orderItemNotes;
 		String orderItemNotesString;
 		
+		View.OnClickListener btnHandler = new View.OnClickListener() {
+		    public void onClick(View v) {
+		        int orderItemIndex = Integer.parseInt(v.getTag().toString());
+		        sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).getOrderItems().remove(orderItemIndex);
+		        ((Button)v).setClickable(false);
+		        ((Button)v).setVisibility(Button.INVISIBLE);
+		        v.invalidate();
+		        
+		        //removing last orderItem causes an error
+		        
+		    }
+		};
+		
 		for (int i = 0; i < mySession.getTables().get(currentTableIndex).getOrders().get(orderNumber).getOrderItemCount(); i++){
 						
 			//add the remove button
 			removeItem = new Button(view.getContext());
 			removeItem.setText("-");
+			removeItem.setOnClickListener(btnHandler);
+			removeItem.setTag(i);
 			removeItem.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
 			layout.addView(removeItem);
+			
+			//no post order submission item removals
+			if (sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).wasSubmitted()){
+				removeItem.setClickable(false);
+				removeItem.setVisibility(Button.INVISIBLE);
+			}
+			
 			
 			//get the name
 			orderItemName = new TextView(view.getContext());
@@ -123,6 +154,15 @@ public class OrderDetails extends Activity {
 			
 		}
 		
+	}
+	
+	public void submitOrder(View view){
+		System.out.println(currentTableIndex + " " + orderNumber);
+		sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).submitOrder();
+//		int tableID = sessionInfo.getInstance().getTables().get(currentTableIndex).getTableID();
+//		int newOrderID = APIRequestor.jsonToOrderID(APIRequestor.post("order", "&TableID=" + tableID));
+//		sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).setDatabaseOrderID(newOrderID);
+//		System.out.println("Database order ID: " + sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).getDatabaseOrderID());
 	}
 
 }

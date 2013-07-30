@@ -34,7 +34,7 @@ public class MenuScreen extends FragmentActivity implements
 
 
 	private static int orderNumber, currentTableIndex;
-	private static String[] tag = new String[5];
+	private static String[] tag = new String[6];
 	
 	private final int TABLE_INDEX = 0,
 						ORDER_NUMBER = 1,
@@ -75,9 +75,10 @@ public class MenuScreen extends FragmentActivity implements
 
 		currentTableIndex = getIntent().getIntExtra("table", 0);
 		orderNumber =  getIntent().getIntExtra("orderNumber", 0);
-
+		
 		tag[TABLE_INDEX] = Integer.toString(currentTableIndex);
 		tag[ORDER_NUMBER] = Integer.toString(orderNumber);
+		
 	}
 	
 	/**

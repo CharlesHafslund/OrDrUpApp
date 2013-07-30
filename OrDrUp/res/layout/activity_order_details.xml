@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:onClick=""
+        android:onClick="submitOrder"
         android:text="@string/order_details_submit_order_button" />
 
     <ScrollView

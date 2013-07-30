@@ -133,7 +133,7 @@ public class APIRequestor {
 	    // Set the timeout in milliseconds until a connection is established.
 	    HttpConnectionParams.setConnectionTimeout(httpParameters, TIMEOUT);
 	    HttpClient hc = new DefaultHttpClient(httpParameters);
-
+	    
 	    // which HTTP request: GET or POST ?
 	    HttpPost post = new HttpPost(url2);
 	    //HttpGet get = new HttpGet(url2);
@@ -160,6 +160,7 @@ public class APIRequestor {
 			e.printStackTrace();
 		}	
 		
+		System.out.println(url2);
 		System.out.println("###################### Result ######################");
 		System.out.println(resultAsString);
 		System.out.println("####################################################");
@@ -253,6 +254,26 @@ public static ArrayList<table> jsonToTableArray(String jsonAsString){
 		//return the table list	    
 		return myTables;
 	}
+
+public static int jsonToOrderID(String jsonAsString){
+	
+//	ArrayList<table> myTables = new ArrayList<table>();
+//	int tableNumber, tableID;
+	int orderID = 0;
+	
+	JsonElement jelement = new JsonParser().parse(jsonAsString);
+	JsonObject  jobject = jelement.getAsJsonObject();
+	JsonArray jarray = jobject.getAsJsonArray("data");
+	orderID = jarray.get(0).getAsJsonObject().get("OrderID").getAsInt();
+	//JsonObject  jobject = jelement.getAsJsonObject();
+	//jobject = jobject.getAsJsonObject("data");
+	//orderID = jobject.get
+			//getAsInt("OrderID");
+	//orderID = jelement.getAsJsonArray().get(0).getAsJsonObject().getAsJsonObject("data").get("OrderID").getAsInt();
+	
+	//return the table list	    
+	return orderID;
+}
 
 
 }

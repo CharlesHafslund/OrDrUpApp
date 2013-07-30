@@ -3,14 +3,15 @@ package com.ordrupapp.ordrup;
 import java.util.ArrayList;
 
 public class order {
-	//private int orderID, tableOrderID;
+	private int tableID, orderID;
 	private ArrayList<orderItem> orderItems;
-	private int status;
+	private boolean submitted;
 	
-	order(){
+	order(int tableID){
 		//set the table order id
-		//this.tableOrderID = tableOrderID;
+		this.tableID = tableID;
 		orderItems = new ArrayList<orderItem>();
+		submitted = false;
 	}
 	
 	public void addOrderItem(int menuItemID){
@@ -44,15 +45,20 @@ public class order {
 		return orderItems;
 	}
 	
-	public int getStatus(){
+	public boolean wasSubmitted(){
 		//get the order status from the DB and return it
-		return 0;
+		return submitted;
+	}
+
+		
+	public void submitOrder(){
+		orderID = APIRequestor.jsonToOrderID(APIRequestor.post("order", "&TableID=" + tableID));
+		System.out.println("Got an ID of " + orderID);
+		for (int i = 0; i < orderItems.size(); i++){
+			APIRequestor.post("orderItem", "&orderID=" + orderID + "&MenuItemID=" + orderItems.get(i).getMenuItemID() + "&PurchasePrice=" + orderItems.get(i).getPrice());
+		}
+		submitted = true;
 	}
 	
-	public void submitOrder(){
-		//create new order and get back order ID
-		//store order ID locally
-		//bundle orderitems and submit
-		
-	}
+	
 }

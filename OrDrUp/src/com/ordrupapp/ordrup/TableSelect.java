@@ -63,26 +63,10 @@ public class TableSelect extends Activity {
 			if (mySession.getTables().contains(newTables.get(i))); //skip
 			else mySession.getTables().add(newTables.get(i));  //new table, add it
 		}
-		
-		//mySession.getTables().addAll(APIRequestor.jsonToTableArray(APIRequestor.get("table", "")));
-		
-		
-//		mySession.getTables().add(new table(111,1));
-//		
-//		mySession.getTables().add(new table(113,7));
-//		mySession.getTables().add(new table(131,9));
-//		mySession.getTables().add(new table(121,2));
-		
-		
+
 		//sort the tables for easy viewing
 		Collections.sort(mySession.getTables());
-		
-		//debug message
-    	//Toast.makeText(getApplicationContext(), menu.INSTANCE.getDebugST(), Toast.LENGTH_LONG).show();
-    	
-		
-		
-		
+
 		int tableCount = mySession.getTables().size();
 		
 			
@@ -105,11 +89,6 @@ public class TableSelect extends Activity {
 		        Intent intent = new Intent(v.getContext(), TableDetail.class);
 		        intent.putExtra("tableNumber", buttonText);
 		        intent.putExtra("tableIndex", Integer.parseInt(tableButton.getTag().toString())); //Tables index in the AL
-		        
-		        
-		      //debug message
-		    	Toast.makeText(getApplicationContext(), "Tag: " + tableButton.getTag().toString(), Toast.LENGTH_SHORT).show();
-		        
 		        startActivity(intent);
 		        
 		    }

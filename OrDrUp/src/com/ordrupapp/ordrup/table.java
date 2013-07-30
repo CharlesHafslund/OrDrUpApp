@@ -14,8 +14,7 @@ public class table implements Comparable {
 	}
 	
 	public int addOrder(){
-		tableOrders.add(new order());
-		System.out.println("-------- table order size is now " + tableOrders.size());
+		tableOrders.add(new order(tableID));
 		return tableOrders.size() - 1; //return the order number index
 	}
 	
@@ -30,13 +29,6 @@ public class table implements Comparable {
 	public ArrayList<order> getOrders(){
 		return tableOrders;
 	}
-	
-//	public void addOrderItem(int orderIndex, int menuItemID){
-//		int orderIndex = orderNumber-1;
-//		if (orderIndex < tableOrders.size()){
-//			tableOrders.get(orderIndex).addOrderItem(menuItemID);
-//		}
-//	}
 	
 	public void addOrderItem(int orderIndex, int sectionID, int menuItemID){
 

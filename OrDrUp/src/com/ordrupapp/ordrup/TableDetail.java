@@ -99,7 +99,7 @@ public class TableDetail extends Activity {
 			Intent intent = new Intent(view.getContext(), MenuScreen.class);
 		    intent.putExtra("orderNumber", orderNumber);
 		    intent.putExtra("table", currentTableIndex);
-		    startActivity(intent);
+			    startActivity(intent);
 	}
 
 	public void getOrders(View view) {
@@ -121,8 +121,8 @@ public class TableDetail extends Activity {
 			}
 
 
-			//update this for orders versus tables
-			//Handler for dynamic order buttons, passes in the table ID and order ID
+			
+			//Handler for dynamic order buttons, passes in the table index / ID and order ID
 			View.OnClickListener btnHandler = new View.OnClickListener() {
 				public void onClick(View v) {
 					String[] tags = (String[]) v.getTag();
@@ -131,7 +131,7 @@ public class TableDetail extends Activity {
 					Intent intent = new Intent(v.getContext(), OrderDetails.class);
 					intent.putExtra("tableIndex", Integer.parseInt(tags[0]));
 					intent.putExtra("orderNumber", Integer.parseInt(tags[1]));
-					//intent.putExtra("table", buttonText);
+					
 					startActivity(intent);
 				}
 			};
