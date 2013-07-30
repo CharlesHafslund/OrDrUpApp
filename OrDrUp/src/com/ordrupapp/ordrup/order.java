@@ -25,6 +25,13 @@ public class order {
 		//orderItem(int menuItemID, String name, float price)
 	}
 	
+	public void addOrderItem(int category, int menuItemIndex, String notes){
+		orderItems.add(new orderItem(menu.INSTANCE.getMenuItemList(category).get(menuItemIndex).getMenuItemID(), 
+									 menu.INSTANCE.getMenuItemList(category).get(menuItemIndex).getName(), 
+									 menu.INSTANCE.getMenuItemList(category).get(menuItemIndex).getPrice(),
+									 notes));
+		//orderItem(int menuItemID, String name, float price)
+	}
 	
 	//remove?
 	public void addOrderItem(int menuItemID, String name, float price){
@@ -55,7 +62,7 @@ public class order {
 		orderID = APIRequestor.jsonToOrderID(APIRequestor.post("order", "&TableID=" + tableID));
 		System.out.println("Got an ID of " + orderID);
 		for (int i = 0; i < orderItems.size(); i++){
-			APIRequestor.post("orderItem", "&orderID=" + orderID + "&MenuItemID=" + orderItems.get(i).getMenuItemID() + "&PurchasePrice=" + orderItems.get(i).getPrice());
+			APIRequestor.post("orderItem", "&orderID=" + orderID + "&MenuItemID=" + orderItems.get(i).getMenuItemID() + "&PurchasePrice=" + orderItems.get(i).getPrice() + "&Notes=" + orderItems.get(i).getNotes());
 		}
 		submitted = true;
 	}

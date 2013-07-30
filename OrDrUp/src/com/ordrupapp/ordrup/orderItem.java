@@ -23,11 +23,12 @@ public class orderItem {
 	
 	//constructor with notes
 	orderItem(int menuItemID, String name, double price, String notes){
-		System.out.println("Adding " + menuItemID + " " + name + " " + price);
+		
 		this.menuItemID = menuItemID;
 		this.name = name.toString();
 		this.price = price;
-		this.notes = notes.toString();
+		this.notes = notes.toString().replaceAll(" ", "_"); //spaces are invalid in the API request string
+		System.out.println("Adding " + menuItemID + " " + name + " " + price + " " + this.notes);
 	}
 	
 	public int getMenuItemID(){

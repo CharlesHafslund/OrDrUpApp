@@ -1,7 +1,10 @@
 package com.ordrupapp.ordrup;
 
+import java.util.ArrayList;
+
 import android.annotation.TargetApi;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.content.Context;
@@ -192,28 +195,29 @@ public class MenuScreen extends FragmentActivity implements
 			
 			tag[MENU_TYPE] = Integer.toString(section);
 			
+			
 			//add the menu items to the screen for the current section
 			TextView vName,vPrice;
-			EditText vNotes;
+			//EditText vNotes;
 			Button addItem;
+			final ArrayList<EditText> vNotes = new ArrayList<EditText>();
 			
 			//Handler for dynamic buttons
 			View.OnClickListener btnHandler = new View.OnClickListener() {
 			    public void onClick(View v) {
 			        
 			        String[] tags = (String[]) v.getTag();
-			        System.out.println("Table index " + tags[0] + " has added to order index " + tags[1] + " an order item of type " + tags[2] + " of order item index " + tags[3] +"." );
+			        
 			        sessionInfo.getInstance().
 			        			getTables().									//from my list of tables
 			        			get(Integer.parseInt(tags[0])).					//for the current table
 			        			addOrderItem(Integer.parseInt(tags[1]), 		//to specified order index
 			        							Integer.parseInt(tags[2]), 		//add an item of type
-			        							Integer.parseInt(tags[3]));		//with type specific index 
+			        							Integer.parseInt(tags[3]),		//with type specific index 
+			        							vNotes.get(Integer.parseInt(tags[3])).getText().toString()); //notes
 			        
-			        		        
 			    }
 			};
-			
 			
 			//add the children
 			for (int i = 0; i < menu.INSTANCE.getMenuItemList(section).size(); i++){
@@ -225,11 +229,10 @@ public class MenuScreen extends FragmentActivity implements
 				vPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
 				vPrice.setText(Double.toString(menu.INSTANCE.getMenuItemList(section).get(i).getPrice()));
 				
-				vNotes = new EditText(container.getContext());
-				vNotes.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
-				
+				vNotes.add(new EditText(container.getContext()));
+				vNotes.get(i).setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
+
 				addItem = new Button(container.getContext());
-				//addItem.setBackgroundResource(R.drawable.add_button);
 				addItem.setText("+");
 				addItem.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
 				tag[MENU_INDEX] = Integer.toString(i);
@@ -237,7 +240,7 @@ public class MenuScreen extends FragmentActivity implements
 				addItem.setOnClickListener(btnHandler);
 				layout.addView(addItem);
 				layout.addView(vName);
-				layout.addView(vNotes);
+				layout.addView(vNotes.get(i));
 				layout.addView(vPrice);
 				
 				
