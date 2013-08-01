@@ -2,8 +2,10 @@ package com.ordrupapp.ordrup;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.TypedValue;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -13,8 +15,8 @@ import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 
 public class OrderDetails extends Activity {
-	
-	
+
+
 	GridLayout layout;
 	int orderNumber, currentTableIndex;
 	@Override
@@ -28,17 +30,17 @@ public class OrderDetails extends Activity {
 
 			currentTableIndex = extras.getInt("tableIndex");
 			orderNumber = extras.getInt("orderNumber");
-			
+
 			getOrderItems((View)findViewById(R.id.order_details_list));
-			
+
 			//Make the button invisible and unclickable if the order has been submitted
 			if (sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).wasSubmitted()){
 				((Button)findViewById(R.id.order_details_submit_order_button)).setClickable(false);
 				((Button)findViewById(R.id.order_details_submit_order_button)).setVisibility(Button.INVISIBLE);
 			}
-			
-			
-			
+
+
+
 		}
 	}
 
@@ -54,7 +56,12 @@ public class OrderDetails extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.order_details, menu);
+		//		getMenuInflater().inflate(R.menu.order_details, menu);
+		//		return true;
+		//	}
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.settings_menu, menu);
 		return true;
 	}
 
@@ -71,41 +78,46 @@ public class OrderDetails extends Activity {
 			//
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
+		case R.id.settings_logoff:
+			sessionInfo.getInstance().clear();
+			Intent intent = new Intent(getApplicationContext(), LoginScreen.class);
+			startActivity(intent);
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	public void getOrderItems(View view){
 		sessionInfo mySession = sessionInfo.getInstance();
-		
+
 		GridLayout layout = (GridLayout) view.findViewById(R.id.order_details_list);
-		
+
 		//clear the view
 		layout.removeAllViews();
-		
+
 		layout.setColumnCount(2);
-		
+
 		//declare the fields
 		TextView orderItemName;
 		Button removeItem;
 		TextView orderItemNotes;
 		String orderItemNotesString;
-		
+
 		View.OnClickListener btnHandler = new View.OnClickListener() {
-		    public void onClick(View v) {
-		        int orderItemIndex = Integer.parseInt(v.getTag().toString());
-		        sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).getOrderItems().remove(orderItemIndex);
-		        ((Button)v).setClickable(false);
-		        ((Button)v).setVisibility(Button.INVISIBLE);
-		        v.invalidate();
-		        
-		        //removing last orderItem causes an error
-		        
-		    }
+			public void onClick(View v) {
+				int orderItemIndex = Integer.parseInt(v.getTag().toString());
+				sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).getOrderItems().remove(orderItemIndex);
+				((Button)v).setClickable(false);
+				((Button)v).setVisibility(Button.INVISIBLE);
+				v.invalidate();
+
+				//removing last orderItem causes an error
+
+			}
 		};
-		
+
 		for (int i = 0; i < mySession.getTables().get(currentTableIndex).getOrders().get(orderNumber).getOrderItemCount(); i++){
-						
+
 			//add the remove button
 			removeItem = new Button(view.getContext());
 			removeItem.setText("-");
@@ -113,26 +125,26 @@ public class OrderDetails extends Activity {
 			removeItem.setTag(i);
 			removeItem.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
 			layout.addView(removeItem);
-			
+
 			//no post order submission item removals
 			if (sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).wasSubmitted()){
 				removeItem.setClickable(false);
 				removeItem.setVisibility(Button.INVISIBLE);
 			}
-			
-			
+
+
 			//get the name
 			orderItemName = new TextView(view.getContext());
 			orderItemName.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
 			orderItemName.setText (
-						mySession.getTables()
-											.get(currentTableIndex)
-											.getOrders()
-											.get(orderNumber)
-											.getOrderItems()
-											.get(i).getName());
+					mySession.getTables()
+					.get(currentTableIndex)
+					.getOrders()
+					.get(orderNumber)
+					.getOrderItems()
+					.get(i).getName());
 			layout.addView(orderItemName);
-			
+
 			//get the notes
 			orderItemNotesString = mySession.getTables()
 					.get(currentTableIndex)
@@ -141,28 +153,28 @@ public class OrderDetails extends Activity {
 					.getOrderItems()
 					.get(i)
 					.getNotes();
-			
+
 			orderItemNotes = new TextView(view.getContext());
 			orderItemNotes.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
-			
+
 			//add a dash if there are notes
 			if (!orderItemNotesString.isEmpty()) orderItemNotes.setText(" - " + orderItemNotesString);
-			
+
 			//else add the empty string
 			else orderItemNotes.setText(orderItemNotesString);
-			
-			
+
+
 		}
-		
+
 	}
-	
+
 	public void submitOrder(View view){
 		System.out.println(currentTableIndex + " " + orderNumber);
 		sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).submitOrder();
-//		int tableID = sessionInfo.getInstance().getTables().get(currentTableIndex).getTableID();
-//		int newOrderID = APIRequestor.jsonToOrderID(APIRequestor.post("order", "&TableID=" + tableID));
-//		sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).setDatabaseOrderID(newOrderID);
-//		System.out.println("Database order ID: " + sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).getDatabaseOrderID());
+		//		int tableID = sessionInfo.getInstance().getTables().get(currentTableIndex).getTableID();
+		//		int newOrderID = APIRequestor.jsonToOrderID(APIRequestor.post("order", "&TableID=" + tableID));
+		//		sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).setDatabaseOrderID(newOrderID);
+		//		System.out.println("Database order ID: " + sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).getDatabaseOrderID());
 	}
 
 }

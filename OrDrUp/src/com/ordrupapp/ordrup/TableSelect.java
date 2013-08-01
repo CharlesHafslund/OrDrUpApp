@@ -10,6 +10,8 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -30,8 +32,25 @@ public class TableSelect extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.table_select, menu);
+		//getMenuInflater().inflate(R.menu.table_select, menu);
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.settings_menu, menu);
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	    case R.id.settings_logoff:
+	        sessionInfo.getInstance().clear();
+	        Intent intent = new Intent(getApplicationContext(), LoginScreen.class);
+	        startActivity(intent);
+	        return true;
+	    default:
+	        return super.onOptionsItemSelected(item);
+	    }
 	}
 	
 	@Override
@@ -40,6 +59,8 @@ public class TableSelect extends Activity {
         super.onConfigurationChanged(newConfig);
 
     }
+	
+	
 	
 	public void getTables(View view) {
 		

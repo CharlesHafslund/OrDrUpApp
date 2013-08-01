@@ -16,6 +16,7 @@ import android.support.v4.app.NavUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,7 +118,13 @@ public class MenuScreen extends FragmentActivity implements
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.menu_screen, menu);
+//		getMenuInflater().inflate(R.menu.menu_screen, menu);
+//		return true;
+//	}
+		
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.settings_menu, menu);
 		return true;
 	}
 
@@ -134,6 +141,11 @@ public class MenuScreen extends FragmentActivity implements
 			//
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
+		case R.id.settings_logoff:
+	        sessionInfo.getInstance().clear();
+	        Intent intent = new Intent(getApplicationContext(), LoginScreen.class);
+	        startActivity(intent);
+	        return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

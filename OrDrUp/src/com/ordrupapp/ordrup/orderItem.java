@@ -9,10 +9,10 @@ public class orderItem {
 	private double price;
 	int menuItemID, orderItemID;
 	
-	orderItem(int menuItemID){
-		this.menuItemID = menuItemID;
-		//handle the rest
-	}
+//	orderItem(int menuItemID){
+//		this.menuItemID = menuItemID;
+//		//handle the rest
+//	}
 	
 	//constructor without orderitem notes
 	orderItem(int menuItemID, String name, double price){

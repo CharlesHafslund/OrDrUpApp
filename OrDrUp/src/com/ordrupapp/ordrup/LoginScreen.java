@@ -16,6 +16,12 @@ public class LoginScreen extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login_screen);
+		
+		//clear the login screen fields
+    	((EditText) findViewById(R.id.sitecode_message)).setText("");
+	    ((EditText) findViewById(R.id.username_message)).setText("");
+	    ((EditText) findViewById(R.id.password_message)).setText("");
+		
 		StrictMode.ThreadPolicy policy = new StrictMode.
 				ThreadPolicy.Builder().permitAll().build();
 				StrictMode.setThreadPolicy(policy); 
@@ -40,15 +46,16 @@ public class LoginScreen extends Activity {
 	    
 	    if (validLogin){
 	    	
+	    	
+	    	
 	    	//get the menu from the server
 	    	myMenu.updateMenu();
 	    	
 	    	Intent intent = new Intent(this, TableSelect.class);
-	    	EditText editText = (EditText) findViewById(R.id.username_message);
-	    	String message = editText.getText().toString();
-	    	intent.putExtra(EXTRA_MESSAGE, message);
-	    	
-	    		    	
+//	    	EditText editText = (EditText) findViewById(R.id.username_message);
+//	    	String message = editText.getText().toString();
+//	    	intent.putExtra(EXTRA_MESSAGE, message);
+
 	    	startActivity(intent);
 	    }
 	    else {

@@ -22,5 +22,7 @@
     <string name="title_section_dessert">Deserts</string>
     <string name="title_activity_order_details">OrderDetails</string>
 	<string name="order_details_submit_order_button">Submit</string>
+	<string name="settings_logoff">Log Off</string>
+
 
 </resources>

@@ -14,9 +14,9 @@ public class order {
 		submitted = false;
 	}
 	
-	public void addOrderItem(int menuItemID){
-		orderItems.add(new orderItem(menuItemID));
-	}
+//	public void addOrderItem(int menuItemID){
+//		orderItems.add(new orderItem(menuItemID));
+//	}
 	
 	public void addOrderItem(int category, int menuItemIndex){
 		orderItems.add(new orderItem(menu.INSTANCE.getMenuItemList(category).get(menuItemIndex).getMenuItemID(), 

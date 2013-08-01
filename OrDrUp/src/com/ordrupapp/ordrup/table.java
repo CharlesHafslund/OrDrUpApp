@@ -48,8 +48,16 @@ public class table implements Comparable {
 	
 	public boolean clearTable(){
 		//check it bill paid for table
-		//if paid, set status to open
-		return true;
+		if (APIRequestor.getBillingStatus(tableID)){
+			//if paid, set status to open
+			System.out.println("Good to clear");
+			return true;
+		}
+		else {
+			System.out.println("Not good to clear");
+			return false;
+		}
+		
 	}
 
 	@Override

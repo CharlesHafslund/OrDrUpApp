@@ -53,4 +53,14 @@
         </LinearLayout>
     </ScrollView>
 
+    <Button
+        android:id="@+id/table_details_clear_table_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clearTable"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="28dp"
+        android:text="Clear Table" />
+
 </RelativeLayout>

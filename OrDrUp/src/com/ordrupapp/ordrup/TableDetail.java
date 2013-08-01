@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.TypedValue;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -16,20 +17,20 @@ import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
 public class TableDetail extends Activity {
-	
+
 	LinearLayout layout;
 	//need to make a call here to get orders for table
 	//String orders[] = {"1","2"};
 	int currentTableIndex;
 	//ArrayList<order> myOrders;
-	
-    private static String[] tag = new String[5];
-	
+
+	private static String[] tag = new String[5];
+
 	private final int TABLE_INDEX = 0,
-						ORDER_NUMBER = 1,
-						MENU_TYPE = 2,
-						MENU_INDEX = 3,
-						NOTES = 4;
+			ORDER_NUMBER = 1,
+			MENU_TYPE = 2,
+			MENU_INDEX = 3,
+			NOTES = 4;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +67,14 @@ public class TableDetail extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.table_detail, menu);
+		//		getMenuInflater().inflate(R.menu.table_detail, menu);
+		//		return true;
+		//	}
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.settings_menu, menu);
 		return true;
 	}
-
 
 
 	@Override
@@ -85,6 +90,11 @@ public class TableDetail extends Activity {
 			//
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
+		case R.id.settings_logoff:
+			sessionInfo.getInstance().clear();
+			Intent intent = new Intent(getApplicationContext(), LoginScreen.class);
+			startActivity(intent);
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -94,67 +104,74 @@ public class TableDetail extends Activity {
 
 		sessionInfo mySession = sessionInfo.getInstance();
 		int orderNumber = mySession.getTables().get(currentTableIndex).addOrder();
-			
-			getOrders((View)findViewById(R.id.orderButtons_list));
-			Intent intent = new Intent(view.getContext(), MenuScreen.class);
-		    intent.putExtra("orderNumber", orderNumber);
-		    intent.putExtra("table", currentTableIndex);
-			    startActivity(intent);
+
+		getOrders((View)findViewById(R.id.orderButtons_list));
+		Intent intent = new Intent(view.getContext(), MenuScreen.class);
+		intent.putExtra("orderNumber", orderNumber);
+		intent.putExtra("table", currentTableIndex);
+		startActivity(intent);
 	}
 
 	public void getOrders(View view) {
 		sessionInfo mySession = sessionInfo.getInstance();
-			
+
 		int orderCount = mySession.getTables().get(currentTableIndex).getOrderCount();
-			
-
-		
-			Button btn[] = new Button[orderCount];
 
 
-			if (null != layout && layout.getChildCount() > 0) {                 
-				try {
-					layout.removeViews (0, layout.getChildCount());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+
+		Button btn[] = new Button[orderCount];
+
+
+		if (null != layout && layout.getChildCount() > 0) {                 
+			try {
+				layout.removeViews (0, layout.getChildCount());
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
+		}
 
 
-			
-			//Handler for dynamic order buttons, passes in the table index / ID and order ID
-			View.OnClickListener btnHandler = new View.OnClickListener() {
-				public void onClick(View v) {
-					String[] tags = (String[]) v.getTag();
-					Button orderButton = (Button)v;
-					String buttonText = orderButton.getText().toString();
-					Intent intent = new Intent(v.getContext(), OrderDetails.class);
-					intent.putExtra("tableIndex", Integer.parseInt(tags[0]));
-					intent.putExtra("orderNumber", Integer.parseInt(tags[1]));
-					
-					startActivity(intent);
-				}
-			};
 
+		//Handler for dynamic order buttons, passes in the table index / ID and order ID
+		View.OnClickListener btnHandler = new View.OnClickListener() {
+			public void onClick(View v) {
+				String[] tags = (String[]) v.getTag();
+				Button orderButton = (Button)v;
+				String buttonText = orderButton.getText().toString();
+				Intent intent = new Intent(v.getContext(), OrderDetails.class);
+				intent.putExtra("tableIndex", Integer.parseInt(tags[0]));
+				intent.putExtra("orderNumber", Integer.parseInt(tags[1]));
 
-			layout = (LinearLayout) findViewById(R.id.orderButtons_list);
-
-			//create the buttons based on the table list and assign the btnHandler to each
-			for (int i=0;i<orderCount;i++){
-				btn[i] = new Button(this);
-				btn[i].setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
-				btn[i].setBackgroundResource(R.drawable.large_plate);  // add image for kicks
-				btn[i].setTextSize(TypedValue.COMPLEX_UNIT_SP,32);
-				btn[i].setText("Order " + (i + 1));
-				tag[ORDER_NUMBER] = Integer.toString(i);
-				btn[i].setTag(tag.clone());
-				btn[i].setOnClickListener(btnHandler);
-
-				layout.addView(btn[i]);
+				startActivity(intent);
 			}
-	
+		};
+
+
+		layout = (LinearLayout) findViewById(R.id.orderButtons_list);
+
+		//create the buttons based on the table list and assign the btnHandler to each
+		for (int i=0;i<orderCount;i++){
+			btn[i] = new Button(this);
+			btn[i].setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
+			btn[i].setBackgroundResource(R.drawable.large_plate);  // add image for kicks
+			btn[i].setTextSize(TypedValue.COMPLEX_UNIT_SP,32);
+			btn[i].setText("Order " + (i + 1));
+			tag[ORDER_NUMBER] = Integer.toString(i);
+			btn[i].setTag(tag.clone());
+			btn[i].setOnClickListener(btnHandler);
+
+			layout.addView(btn[i]);
+		}
+
 
 	}
 
-
+	public void clearTable(View view){
+		if(sessionInfo.getInstance().getTables().get(currentTableIndex).clearTable()){
+			Toast.makeText(getApplicationContext(), "Table Cleared.", Toast.LENGTH_LONG).show();
+		}
+		else {
+			Toast.makeText(getApplicationContext(), "Cannot Clear: Table has unpaid bill.", Toast.LENGTH_LONG).show();
+		}
+	}
 }
