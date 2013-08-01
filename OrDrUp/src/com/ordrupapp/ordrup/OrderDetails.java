@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
 public class OrderDetails extends Activity {
@@ -170,11 +171,12 @@ public class OrderDetails extends Activity {
 
 	public void submitOrder(View view){
 		System.out.println(currentTableIndex + " " + orderNumber);
-		sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).submitOrder();
-		//		int tableID = sessionInfo.getInstance().getTables().get(currentTableIndex).getTableID();
-		//		int newOrderID = APIRequestor.jsonToOrderID(APIRequestor.post("order", "&TableID=" + tableID));
-		//		sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).setDatabaseOrderID(newOrderID);
-		//		System.out.println("Database order ID: " + sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).getDatabaseOrderID());
+		boolean submitted = sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).submitOrder();
+		
+		//check failure state
+		if(!submitted){
+			Toast.makeText(getApplicationContext(), "Error: Failed to submit order", Toast.LENGTH_LONG).show();
+		}
 	}
 
 }

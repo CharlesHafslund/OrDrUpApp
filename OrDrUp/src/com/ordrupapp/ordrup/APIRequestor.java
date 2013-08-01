@@ -280,6 +280,7 @@ public class APIRequestor {
 
 		JsonElement jelement = new JsonParser().parse(jsonAsString);
 		JsonObject  jobject = jelement.getAsJsonObject();
+		int statusCode = jobject.get("statusCode").getAsInt();
 		JsonArray jarray = jobject.getAsJsonArray("data");
 
 
@@ -302,17 +303,12 @@ public class APIRequestor {
 
 		//	ArrayList<table> myTables = new ArrayList<table>();
 		//	int tableNumber, tableID;
-		int orderID = 0;
+		int orderID = -1;
 
 		JsonElement jelement = new JsonParser().parse(jsonAsString);
 		JsonObject  jobject = jelement.getAsJsonObject();
 		JsonArray jarray = jobject.getAsJsonArray("data");
 		orderID = jarray.get(0).getAsJsonObject().get("OrderID").getAsInt();
-		//JsonObject  jobject = jelement.getAsJsonObject();
-		//jobject = jobject.getAsJsonObject("data");
-		//orderID = jobject.get
-		//getAsInt("OrderID");
-		//orderID = jelement.getAsJsonArray().get(0).getAsJsonObject().getAsJsonObject("data").get("OrderID").getAsInt();
 
 		//return the table list	    
 		return orderID;
