@@ -102,6 +102,7 @@ public class OrderDetails extends Activity {
 		TextView orderItemName;
 		Button removeItem;
 		TextView orderItemNotes;
+		TextView status;
 		String orderItemNotesString;
 
 		View.OnClickListener btnHandler = new View.OnClickListener() {
@@ -118,20 +119,23 @@ public class OrderDetails extends Activity {
 		};
 
 		for (int i = 0; i < mySession.getTables().get(currentTableIndex).getOrders().get(orderNumber).getOrderItemCount(); i++){
-
-			//add the remove button
-			removeItem = new Button(view.getContext());
-			removeItem.setText("-");
-			removeItem.setOnClickListener(btnHandler);
-			removeItem.setTag(i);
-			removeItem.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
-			layout.addView(removeItem);
-
-			//no post order submission item removals
-			if (sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).wasSubmitted()){
-				removeItem.setClickable(false);
-				removeItem.setVisibility(Button.INVISIBLE);
+			
+			//add the remove button if the order has not been submitted
+			if (!mySession.getTables().get(currentTableIndex).getOrders().get(orderNumber).wasSubmitted()){
+				
+				removeItem = new Button(view.getContext());
+				removeItem.setText("-");
+				removeItem.setOnClickListener(btnHandler);
+				removeItem.setTag(i);
+				removeItem.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
+				layout.addView(removeItem);
 			}
+
+//			//no post order submission item removals
+//			if (sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).wasSubmitted()){
+//				removeItem.setClickable(false);
+//				removeItem.setVisibility(Button.INVISIBLE);
+//			}
 
 
 			//get the name
@@ -163,6 +167,19 @@ public class OrderDetails extends Activity {
 
 			//else add the empty string
 			else orderItemNotes.setText(orderItemNotesString);
+			
+			if (mySession.getTables().get(currentTableIndex).getOrders().get(orderNumber).wasSubmitted()){
+				status = new TextView(view.getContext());
+				status.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
+				status.setText (" - " +
+						mySession.getTables()
+						.get(currentTableIndex)
+						.getOrders()
+						.get(orderNumber)
+						.getOrderItems()
+						.get(i).getStatus());
+				layout.addView(status);
+			}
 
 
 		}
@@ -172,7 +189,7 @@ public class OrderDetails extends Activity {
 	public void submitOrder(View view){
 		System.out.println(currentTableIndex + " " + orderNumber);
 		boolean submitted = sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).submitOrder();
-		
+
 		//check failure state
 		if(!submitted){
 			Toast.makeText(getApplicationContext(), "Error: Failed to submit order", Toast.LENGTH_LONG).show();

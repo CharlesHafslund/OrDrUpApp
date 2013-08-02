@@ -62,11 +62,20 @@ public class order {
 
 	public boolean submitOrder(){
 		orderID = APIRequestor.jsonToOrderID(APIRequestor.post("order", "&TableID=" + tableID));
+		int orderItemID = -1;
 		System.out.println("Got an ID of " + orderID);
 
 		if (orderID >= 0 ){
 			for (int i = 0; i < orderItems.size(); i++){
-				APIRequestor.post("orderItem", "&orderID=" + orderID + "&MenuItemID=" + orderItems.get(i).getMenuItemID() + "&PurchasePrice=" + orderItems.get(i).getPrice() + "&Notes=" + orderItems.get(i).getNotes());
+				//APIRequestor.post("orderItem", "&orderID=" + orderID + "&MenuItemID=" + orderItems.get(i).getMenuItemID() + "&PurchasePrice=" + orderItems.get(i).getPrice() + "&Notes=" + orderItems.get(i).getNotes());
+				orderItemID = APIRequestor.addOrderItemToOrder(orderID, orderItems.get(i).getMenuItemID(), orderItems.get(i).getPrice(), orderItems.get(i).getNotes());
+				if (orderItemID >= 0){
+					System.out.println("OrderItemID = " + orderItemID);
+					orderItems.get(i).setOrderItemID(orderItemID);
+				}
+				else {
+					//we should delete the order from the system
+				}
 			}
 			submitted = true;
 		}

@@ -7,7 +7,7 @@ package com.ordrupapp.ordrup;
 public class orderItem {
 	private String name,notes;
 	private double price;
-	int menuItemID, orderItemID;
+	int menuItemID, orderItemID = -1;
 	
 //	orderItem(int menuItemID){
 //		this.menuItemID = menuItemID;
@@ -35,9 +35,13 @@ public class orderItem {
 		return menuItemID;
 	}
 	
-//	public int getOrderID(){
-//		return orderID;
-//	}
+	public void setOrderItemID(int orderItemID){
+		this.orderItemID = orderItemID;
+	}
+	
+	public int getOrderItemID(){
+		return orderItemID;
+	}
 	
 	public String getName(){
 		return name.toString();
@@ -45,6 +49,10 @@ public class orderItem {
 	
 	public double getPrice(){
 		return price;
+	}
+	
+	public String getStatus(){
+		return APIRequestor.getOrderItemStatus(orderItemID);
 	}
 	
 	public String getNotes(){

@@ -36,7 +36,8 @@ public class APIRequestor {
 	public final static int 	BEVERAGES = 0,
 			APPETIZERS = 1,
 			MAIN_COURSE = 2,
-			DESSERT = 3;
+			DESSERT = 3,
+			SUCCESS = 200;
 
 	public static boolean login(String username, String password){
 
@@ -168,7 +169,7 @@ public class APIRequestor {
 
 		return resultAsString;
 	}
-	
+
 	public static String put(String resource, String parameters){
 
 		int TIMEOUT = 2000;
@@ -178,9 +179,9 @@ public class APIRequestor {
 		HttpConnectionParams.setConnectionTimeout(httpParameters, TIMEOUT);
 		HttpClient hc = new DefaultHttpClient(httpParameters);
 
-		
+
 		HttpPut put = new HttpPut(url2);
-		
+
 
 		HttpResponse rp = null;
 		try {
@@ -307,28 +308,64 @@ public class APIRequestor {
 
 		JsonElement jelement = new JsonParser().parse(jsonAsString);
 		JsonObject  jobject = jelement.getAsJsonObject();
-		JsonArray jarray = jobject.getAsJsonArray("data");
-		orderID = jarray.get(0).getAsJsonObject().get("OrderID").getAsInt();
+		int statusCode = jobject.get("statusCode").getAsInt();
+
+		//proper order creation case
+		if (statusCode == 200){
+			JsonArray jarray = jobject.getAsJsonArray("data");
+			orderID = jarray.get(0).getAsJsonObject().get("OrderID").getAsInt();
+		}
 
 		//return the table list	    
 		return orderID;
 	}
-	
+
 	public static boolean getBillingStatus(int tableID){
-		
+
 		String jsonAsString = get("table", "&TableID=" + tableID);
 		JsonElement jelement = new JsonParser().parse(jsonAsString);
 		JsonObject  jobject = jelement.getAsJsonObject();
 		int statusCode = jobject.get("statusCode").getAsInt();
-		
+
 		JsonArray jarray = jobject.getAsJsonArray("data");
 		int paid = jarray.get(0).getAsJsonObject().get("Paid").getAsInt();
 		if (paid < 1){
-			
+
 			System.out.println("Status of get Bill: " + jarray.get(0).getAsJsonObject().get("Paid").getAsInt());
 			return false;
 		}
 		else return true;
+	}
+
+	public static int addOrderItemToOrder(int orderID, int menuItemID, double purchasePrice, String notes){
+		String jsonAsString = post("orderItem", "&orderID=" + orderID + "&MenuItemID=" + menuItemID + "&PurchasePrice=" + purchasePrice + "&Notes=" + notes);
+		JsonElement jelement = new JsonParser().parse(jsonAsString);
+		JsonObject  jobject = jelement.getAsJsonObject();
+		int statusCode = jobject.get("statusCode").getAsInt();
+		int orderItemID = -1;
+		System.out.println("Status code for add orderItem: " + statusCode);
+		if (statusCode == 200){
+			JsonArray jarray = jobject.getAsJsonArray("data");
+			orderItemID = jarray.get(0).getAsJsonObject().get("OrderItemID").getAsInt();
+		}
+		return orderItemID;
+
+	}
+
+
+	public static String getOrderItemStatus(int orderItemID){
+
+		String jsonAsString = get("orderItem", "&OrderItemID=" + orderItemID);
+		JsonElement jelement = new JsonParser().parse(jsonAsString);
+		JsonObject  jobject = jelement.getAsJsonObject();
+		int statusCode = jobject.get("statusCode").getAsInt();
+		String status = "";
+		if (statusCode == 200){
+			JsonArray jarray = jobject.getAsJsonArray("data");
+			return jarray.get(0).getAsJsonObject().get("Status").getAsString();
+		}
+		
+		return status;
 	}
 
 }
