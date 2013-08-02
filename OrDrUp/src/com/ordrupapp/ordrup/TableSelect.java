@@ -134,5 +134,11 @@ public class TableSelect extends Activity {
 		}
 		
 	}
+	public void refresh(View view){
+		getTables(view);
+		Intent intent = getIntent();
+	    finish();
+	    startActivity(intent);
+	}
 
 }

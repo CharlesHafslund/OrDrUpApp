@@ -31,7 +31,9 @@ public class OrderDetails extends Activity {
 
 			currentTableIndex = extras.getInt("tableIndex");
 			orderNumber = extras.getInt("orderNumber");
-
+			
+			((TextView)findViewById(R.id.order_details_title)).setText("Order " + (orderNumber + 1));
+			
 			getOrderItems((View)findViewById(R.id.order_details_list));
 
 			//Make the button invisible and unclickable if the order has been submitted
@@ -194,6 +196,18 @@ public class OrderDetails extends Activity {
 		if(!submitted){
 			Toast.makeText(getApplicationContext(), "Error: Failed to submit order", Toast.LENGTH_LONG).show();
 		}
+		else{
+			Toast.makeText(getApplicationContext(), "Success: Order Submitted", Toast.LENGTH_LONG).show();
+			refresh();
+		}
+		
+		
+	}
+	
+	public void refresh(){
+		Intent intent = getIntent();
+	    finish();
+	    startActivity(intent);
 	}
 
 }

@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="25dp"
         android:layout_marginTop="36dp"
-        android:onClick="getTables"
+        android:onClick="refresh"
         android:text="@string/button_getTables" />
 
     <ScrollView
