@@ -133,13 +133,6 @@ public class OrderDetails extends Activity {
 				layout.addView(removeItem);
 			}
 
-//			//no post order submission item removals
-//			if (sessionInfo.getInstance().getTables().get(currentTableIndex).getOrders().get(orderNumber).wasSubmitted()){
-//				removeItem.setClickable(false);
-//				removeItem.setVisibility(Button.INVISIBLE);
-//			}
-
-
 			//get the name
 			orderItemName = new TextView(view.getContext());
 			orderItemName.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
@@ -165,10 +158,14 @@ public class OrderDetails extends Activity {
 			orderItemNotes.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
 
 			//add a dash if there are notes
-			if (!orderItemNotesString.isEmpty()) orderItemNotes.setText(" - " + orderItemNotesString);
+			//if (!orderItemNotesString.isEmpty()) {
+				orderItemNotes.setText(" - " + orderItemNotesString);
+			//}
 
 			//else add the empty string
-			else orderItemNotes.setText(orderItemNotesString);
+			//else {
+			//	orderItemNotes.setText(orderItemNotesString);
+			//}
 			
 			if (mySession.getTables().get(currentTableIndex).getOrders().get(orderNumber).wasSubmitted()){
 				status = new TextView(view.getContext());

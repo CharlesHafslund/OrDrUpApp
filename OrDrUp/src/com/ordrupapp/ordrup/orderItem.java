@@ -56,7 +56,7 @@ public class orderItem {
 	}
 	
 	public String getNotes(){
-		return notes.toString();
+		return notes;
 	}
 	
 	

@@ -61,7 +61,8 @@ public class order {
 
 
 	public boolean submitOrder(){
-		orderID = APIRequestor.jsonToOrderID(APIRequestor.post("order", "&TableID=" + tableID));
+		//orderID = APIRequestor.jsonToOrderID(APIRequestor.post("order", "&TableID=" + tableID));
+		orderID = APIRequestor.addOrderToTable(tableID);		
 		int orderItemID = -1;
 		System.out.println("Got an ID of " + orderID);
 

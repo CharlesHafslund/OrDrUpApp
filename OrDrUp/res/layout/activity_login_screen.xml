@@ -12,11 +12,13 @@
         android:id="@+id/logo_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/logo_big" />
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo_big_2" />
+
  	<EditText
         android:id="@+id/sitecode_message"
+        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/logo_image"

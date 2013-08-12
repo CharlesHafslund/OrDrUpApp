@@ -278,29 +278,35 @@ public class APIRequestor {
 
 		ArrayList<table> myTables = new ArrayList<table>();
 		int tableNumber, tableID;
-
+		System.out.println("here");
 		JsonElement jelement = new JsonParser().parse(jsonAsString);
 		JsonObject  jobject = jelement.getAsJsonObject();
 		int statusCode = jobject.get("statusCode").getAsInt();
-		JsonArray jarray = jobject.getAsJsonArray("data");
+		System.out.println("Sitting here with status code " + statusCode);
+		
+		
+		if (statusCode == 200 && jobject.has("data")) {
+			System.out.println("Sitting here with status code " + statusCode);
+			JsonArray jarray = jobject.getAsJsonArray("data");
 
 
-		for (int i = 0; i < jarray.size(); i++){
+			for (int i = 0; i < jarray.size(); i++){
 
-			//unpack data from the json object
+				//unpack data from the json object
 
-			tableID = jarray.get(i).getAsJsonObject().get("TableID").getAsInt();
-			tableNumber = jarray.get(i).getAsJsonObject().get("Number").getAsInt();
-			//add the item to the proper sub menu
-			myTables.add(new table(tableID, tableNumber));
+				tableID = jarray.get(i).getAsJsonObject().get("TableID").getAsInt();
+				tableNumber = jarray.get(i).getAsJsonObject().get("Number").getAsInt();
+				//add the item to the proper sub menu
+				myTables.add(new table(tableID, tableNumber));
 
+			}
 		}
 
 		//return the table list	    
 		return myTables;
 	}
 
-	public static int jsonToOrderID(String jsonAsString){
+	private static int jsonToOrderID(String jsonAsString){
 
 		//	ArrayList<table> myTables = new ArrayList<table>();
 		//	int tableNumber, tableID;
@@ -320,21 +326,33 @@ public class APIRequestor {
 		return orderID;
 	}
 
+	public static int addOrderToTable(int tableID){
+		return APIRequestor.jsonToOrderID(APIRequestor.post("order", "&TableID=" + tableID));
+	}
+
 	public static boolean getBillingStatus(int tableID){
 
 		String jsonAsString = get("table", "&TableID=" + tableID);
+		System.out.println(jsonAsString);
 		JsonElement jelement = new JsonParser().parse(jsonAsString);
 		JsonObject  jobject = jelement.getAsJsonObject();
+		
+		//System.out.println(jobject.getAsString());
+		
 		int statusCode = jobject.get("statusCode").getAsInt();
 
 		JsonArray jarray = jobject.getAsJsonArray("data");
 		int paid = jarray.get(0).getAsJsonObject().get("Paid").getAsInt();
 		if (paid < 1){
-
+			
 			System.out.println("Status of get Bill: " + jarray.get(0).getAsJsonObject().get("Paid").getAsInt());
 			return false;
 		}
-		else return true;
+		
+		else {
+			put("table", "&TableID=" + tableID + "&Status=Available");
+			return true;
+		}
 	}
 
 	public static int addOrderItemToOrder(int orderID, int menuItemID, double purchasePrice, String notes){
@@ -364,7 +382,7 @@ public class APIRequestor {
 			JsonArray jarray = jobject.getAsJsonArray("data");
 			return jarray.get(0).getAsJsonObject().get("Status").getAsString();
 		}
-		
+
 		return status;
 	}
 
