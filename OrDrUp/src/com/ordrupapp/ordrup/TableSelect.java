@@ -80,10 +80,22 @@ public class TableSelect extends Activity {
 		//get the updated list of tables from the server, this will only get the tables assigned to the logged in user that are occupied
 		ArrayList<table> newTables = APIRequestor.jsonToTableArray(APIRequestor.get("table", "&UserID=" + mySession.getUserID() + "&Status=Occupied"));
 		
+		//remove tables from the list if not in my updated list
+		for (int i = 0; i < mySession.getTables().size(); i++ ){
+			if (!newTables.contains(mySession.getTables().get(i))){
+				mySession.getTables().remove(i);
+			}
+				
+		}
+		
+		//add tables if not already in my table list
 		for (int i = 0; i < newTables.size(); i++){
 			if (mySession.getTables().contains(newTables.get(i))); //skip
 			else mySession.getTables().add(newTables.get(i));  //new table, add it
+			
 		}
+		
+		
 
 		//sort the tables for easy viewing
 		Collections.sort(mySession.getTables());

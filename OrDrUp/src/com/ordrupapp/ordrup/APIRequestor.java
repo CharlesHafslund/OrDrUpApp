@@ -213,6 +213,27 @@ public class APIRequestor {
 		return resultAsString;
 	}
 
+	public static int getMyRestaurantID(){
+		String userInfo = get("user", "");
+		int restaurantID = 0;
+
+
+		JsonElement jelement = new JsonParser().parse(userInfo);
+		JsonObject  jobject = jelement.getAsJsonObject();
+		JsonArray jarray = jobject.getAsJsonArray("data");
+
+		for (int i = 0; i < jarray.size(); i++){
+			if (jarray.get(i).getAsJsonObject().get("Username").getAsString().equals(sessionInfo.getInstance().getUsername())){
+				restaurantID = jarray.get(i).getAsJsonObject().get("RestaurantID").getAsInt();
+			}
+		}
+
+
+		System.out.println("############ My restaurant id is : " + restaurantID);
+		return restaurantID;
+
+	}
+	
 	public static int getMyUserID(){
 		String userInfo = get("user", "");
 		int userID = 0;
@@ -283,8 +304,8 @@ public class APIRequestor {
 		JsonObject  jobject = jelement.getAsJsonObject();
 		int statusCode = jobject.get("statusCode").getAsInt();
 		System.out.println("Sitting here with status code " + statusCode);
-		
-		
+
+
 		if (statusCode == 200 && jobject.has("data")) {
 			System.out.println("Sitting here with status code " + statusCode);
 			JsonArray jarray = jobject.getAsJsonArray("data");
@@ -336,23 +357,25 @@ public class APIRequestor {
 		System.out.println(jsonAsString);
 		JsonElement jelement = new JsonParser().parse(jsonAsString);
 		JsonObject  jobject = jelement.getAsJsonObject();
-		
-		//System.out.println(jobject.getAsString());
-		
-		int statusCode = jobject.get("statusCode").getAsInt();
 
-		JsonArray jarray = jobject.getAsJsonArray("data");
-		int paid = jarray.get(0).getAsJsonObject().get("Paid").getAsInt();
-		if (paid < 1){
-			
-			System.out.println("Status of get Bill: " + jarray.get(0).getAsJsonObject().get("Paid").getAsInt());
-			return false;
-		}
-		
-		else {
-			put("table", "&TableID=" + tableID + "&Status=Available");
-			return true;
-		}
+		//System.out.println(jobject.getAsString());
+
+		int statusCode = jobject.get("statusCode").getAsInt();
+		//if (statusCode == 200 && jobject.has("data")) {
+			JsonArray jarray = jobject.getAsJsonArray("data");
+			int paid = jarray.get(0).getAsJsonObject().get("Paid").getAsInt();
+			if (paid < 1){
+
+				System.out.println("Status of get Bill: " + jarray.get(0).getAsJsonObject().get("Paid").getAsInt());
+				return false;
+			}
+
+			else {
+				put("table", "&TableID=" + tableID + "&Status=Available");
+				return true;
+			}
+		//}
+		//return false;
 	}
 
 	public static int addOrderItemToOrder(int orderID, int menuItemID, double purchasePrice, String notes){

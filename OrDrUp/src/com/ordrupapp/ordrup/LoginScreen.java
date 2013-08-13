@@ -42,6 +42,7 @@ public class LoginScreen extends Activity {
 	    sessionInfo mySession = sessionInfo.getInstance();
 	    menu myMenu = menu.INSTANCE;
 	    
+	    //sitecode is not used at this point, a future version would use this for additional user authentication tasks
 	    validLogin = mySession.verify(username.toString(), password.toString(), sitecode.toString());
 	    
 	    if (validLogin){

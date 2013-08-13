@@ -28,7 +28,8 @@ private int userid;
 		if(valid){
 			setUsername(username);
 			setPassword(password);
-			setSitecode(sitecode);
+			//setSitecode(sitecode);
+			setSitecode(APIRequestor.getMyRestaurantID()+"");
 			setUserID(APIRequestor.getMyUserID());
 			tables = new ArrayList<table>();
 			return true;
