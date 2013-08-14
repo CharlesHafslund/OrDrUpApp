@@ -228,6 +228,9 @@ public class MenuScreen extends FragmentActivity implements
 			        							Integer.parseInt(tags[3]),		//with type specific index 
 			        							vNotes.get(Integer.parseInt(tags[3])).getText().toString()); //notes
 			        
+			        //clear the notes box for the next order
+			        vNotes.get(Integer.parseInt(tags[3])).setText("");
+			        
 			    }
 			};
 			
