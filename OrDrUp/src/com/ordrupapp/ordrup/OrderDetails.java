@@ -114,8 +114,13 @@ public class OrderDetails extends Activity {
 				((Button)v).setClickable(false);
 				((Button)v).setVisibility(Button.INVISIBLE);
 				v.invalidate();
+				
+				//refresh the view
+				Intent intent = getIntent();
+			    finish();
+			    startActivity(intent);
 
-				//removing last orderItem causes an error
+				
 
 			}
 		};
