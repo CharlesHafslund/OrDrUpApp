@@ -16,9 +16,7 @@ public class order {
 		submitted = false;
 	}
 
-	//	public void addOrderItem(int menuItemID){
-	//		orderItems.add(new orderItem(menuItemID));
-	//	}
+
 
 	public void addOrderItem(int category, int menuItemIndex){
 		orderItems.add(new orderItem(menu.INSTANCE.getMenuItemList(category).get(menuItemIndex).getMenuItemID(), 
@@ -32,7 +30,7 @@ public class order {
 				menu.INSTANCE.getMenuItemList(category).get(menuItemIndex).getName(), 
 				menu.INSTANCE.getMenuItemList(category).get(menuItemIndex).getPrice(),
 				notes));
-		//orderItem(int menuItemID, String name, float price)
+	
 	}
 
 	//remove?

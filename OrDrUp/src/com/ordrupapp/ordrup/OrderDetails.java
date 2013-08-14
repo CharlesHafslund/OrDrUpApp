@@ -98,7 +98,7 @@ public class OrderDetails extends Activity {
 		//clear the view
 		layout.removeAllViews();
 
-		layout.setColumnCount(2);
+		layout.setColumnCount(3);
 
 		//declare the fields
 		TextView orderItemName;
@@ -153,19 +153,19 @@ public class OrderDetails extends Activity {
 					.getOrderItems()
 					.get(i)
 					.getNotes();
-
+			
 			orderItemNotes = new TextView(view.getContext());
 			orderItemNotes.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
-
-			//add a dash if there are notes
-			//if (!orderItemNotesString.isEmpty()) {
+			
+			System.out.println("Notes: " + orderItemNotesString);
+			
+			//add notes if any
+			if (!orderItemNotesString.isEmpty()) {
 				orderItemNotes.setText(" - " + orderItemNotesString);
-			//}
+			}
+			
+			layout.addView(orderItemNotes);
 
-			//else add the empty string
-			//else {
-			//	orderItemNotes.setText(orderItemNotesString);
-			//}
 			
 			if (mySession.getTables().get(currentTableIndex).getOrders().get(orderNumber).wasSubmitted()){
 				status = new TextView(view.getContext());
