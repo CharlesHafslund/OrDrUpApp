@@ -2,11 +2,6 @@ package com.ordrupapp.ordrup;
 
 import java.util.ArrayList;
 
-import com.google.gson.Gson;
-
-import android.app.Application;
-import android.os.StrictMode;
-import android.widget.Toast;
 
 public enum menu{
 	INSTANCE;
@@ -45,11 +40,10 @@ public enum menu{
 		appetizers.clear();
 		mainCourse.clear();
 		dessert.clear();
-		//String jsonReq = APIRequestor.get("menuItem", "");
+		
 		
 		ArrayList<ArrayList<menuItem>> myMenu = (ArrayList<ArrayList<menuItem>>) APIRequestor.jsonToMenuItemArray(APIRequestor.get("menuItem", ""));
-//		ArrayList<ArrayList<menuItem>> myMenu = 
-//				(ArrayList<ArrayList<menuItem>>) APIRequestor.jsonToMenuItemArray(jsonReq).clone();
+
 		beverages = (ArrayList<menuItem>) myMenu.get(BEVERAGES).clone();
 		appetizers = (ArrayList<menuItem>) myMenu.get(APPETIZERS).clone();
 		mainCourse = (ArrayList<menuItem>) myMenu.get(MAIN_COURSE).clone();

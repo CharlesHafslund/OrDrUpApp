@@ -43,19 +43,16 @@ public class LoginScreen extends Activity {
 	    menu myMenu = menu.INSTANCE;
 	    
 	    //sitecode is not used at this point, a future version would use this for additional user authentication tasks
+	    //At this point we simply pull it from the server
 	    validLogin = mySession.verify(username.toString(), password.toString(), sitecode.toString());
 	    
 	    if (validLogin){
-	    	
-	    	
+	   
 	    	
 	    	//get the menu from the server
 	    	myMenu.updateMenu();
 	    	
 	    	Intent intent = new Intent(this, TableSelect.class);
-//	    	EditText editText = (EditText) findViewById(R.id.username_message);
-//	    	String message = editText.getText().toString();
-//	    	intent.putExtra(EXTRA_MESSAGE, message);
 
 	    	startActivity(intent);
 	    }

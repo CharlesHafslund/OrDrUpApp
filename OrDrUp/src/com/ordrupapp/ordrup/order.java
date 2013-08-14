@@ -22,7 +22,7 @@ public class order {
 		orderItems.add(new orderItem(menu.INSTANCE.getMenuItemList(category).get(menuItemIndex).getMenuItemID(), 
 				menu.INSTANCE.getMenuItemList(category).get(menuItemIndex).getName(), 
 				menu.INSTANCE.getMenuItemList(category).get(menuItemIndex).getPrice()));
-		//orderItem(int menuItemID, String name, float price)
+		
 	}
 
 	public void addOrderItem(int category, int menuItemIndex, String notes){
@@ -59,17 +59,17 @@ public class order {
 
 
 	public boolean submitOrder(){
-		//orderID = APIRequestor.jsonToOrderID(APIRequestor.post("order", "&TableID=" + tableID));
+		
 		orderID = APIRequestor.addOrderToTable(tableID);		
 		int orderItemID = -1;
-		System.out.println("Got an ID of " + orderID);
+		
 
 		if (orderID >= 0 ){
 			for (int i = 0; i < orderItems.size(); i++){
-				//APIRequestor.post("orderItem", "&orderID=" + orderID + "&MenuItemID=" + orderItems.get(i).getMenuItemID() + "&PurchasePrice=" + orderItems.get(i).getPrice() + "&Notes=" + orderItems.get(i).getNotes());
+				
 				orderItemID = APIRequestor.addOrderItemToOrder(orderID, orderItems.get(i).getMenuItemID(), orderItems.get(i).getPrice(), orderItems.get(i).getNotes());
 				if (orderItemID >= 0){
-					System.out.println("OrderItemID = " + orderItemID);
+					
 					orderItems.get(i).setOrderItemID(orderItemID);
 				}
 				else {

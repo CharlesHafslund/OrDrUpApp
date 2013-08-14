@@ -1,11 +1,6 @@
 package com.ordrupapp.ordrup;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -28,8 +23,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
-import android.util.Log;
 
 
 public class APIRequestor {
@@ -61,9 +54,6 @@ public class APIRequestor {
 			//get the connection status
 			int status = connection.getResponseCode();
 
-			//debug message, display status
-			System.out.println("Login URL = " + url.toString());
-			System.out.println("Status = " + status);
 			//connection.disconnect();
 			if (status == 202) {
 
@@ -119,9 +109,10 @@ public class APIRequestor {
 			e.printStackTrace();
 		}	
 
-		System.out.println("###################### Result ######################");
-		System.out.println(resultAsString);
-		System.out.println("####################################################");
+		//Debug messages for request
+//		System.out.println("###################### Result ######################");
+//		System.out.println(resultAsString);
+//		System.out.println("####################################################");
 
 		return resultAsString;
 	}
@@ -162,10 +153,11 @@ public class APIRequestor {
 			e.printStackTrace();
 		}	
 
-		System.out.println(url2);
-		System.out.println("###################### Result ######################");
-		System.out.println(resultAsString);
-		System.out.println("####################################################");
+		//Debug messages for request
+//		System.out.println(url2);
+//		System.out.println("###################### Result ######################");
+//		System.out.println(resultAsString);
+//		System.out.println("####################################################");
 
 		return resultAsString;
 	}
@@ -205,10 +197,11 @@ public class APIRequestor {
 			e.printStackTrace();
 		}	
 
-		System.out.println(url2);
-		System.out.println("###################### Result ######################");
-		System.out.println(resultAsString);
-		System.out.println("####################################################");
+		//Debug messages for request
+//		System.out.println(url2);
+//		System.out.println("###################### Result ######################");
+//		System.out.println(resultAsString);
+//		System.out.println("####################################################");
 
 		return resultAsString;
 	}
@@ -229,7 +222,7 @@ public class APIRequestor {
 		}
 
 
-		System.out.println("############ My restaurant id is : " + restaurantID);
+		
 		return restaurantID;
 
 	}
@@ -250,7 +243,7 @@ public class APIRequestor {
 		}
 
 
-		System.out.println("############ My user id is : " + userID);
+		
 		return userID;
 
 	}
@@ -299,15 +292,14 @@ public class APIRequestor {
 
 		ArrayList<table> myTables = new ArrayList<table>();
 		int tableNumber, tableID;
-		System.out.println("here");
+
 		JsonElement jelement = new JsonParser().parse(jsonAsString);
 		JsonObject  jobject = jelement.getAsJsonObject();
 		int statusCode = jobject.get("statusCode").getAsInt();
-		System.out.println("Sitting here with status code " + statusCode);
 
 
 		if (statusCode == 200 && jobject.has("data")) {
-			System.out.println("Sitting here with status code " + statusCode);
+			
 			JsonArray jarray = jobject.getAsJsonArray("data");
 
 
@@ -350,7 +342,8 @@ public class APIRequestor {
 	public static int addOrderToTable(int tableID){
 		return APIRequestor.jsonToOrderID(APIRequestor.post("order", "&TableID=" + tableID));
 	}
-
+	
+	//Not implemented, for a future release which allows waiter to clear table from mobile app
 	public static boolean getBillingStatus(int tableID){
 
 		String jsonAsString = get("table", "&TableID=" + tableID);
@@ -358,24 +351,23 @@ public class APIRequestor {
 		JsonElement jelement = new JsonParser().parse(jsonAsString);
 		JsonObject  jobject = jelement.getAsJsonObject();
 
-		//System.out.println(jobject.getAsString());
+		
 
 		int statusCode = jobject.get("statusCode").getAsInt();
-		//if (statusCode == 200 && jobject.has("data")) {
+		
 			JsonArray jarray = jobject.getAsJsonArray("data");
 			int paid = jarray.get(0).getAsJsonObject().get("Paid").getAsInt();
-			if (paid < 1){
+			
+			if (paid < 1){  //unpaid bill
 
-				System.out.println("Status of get Bill: " + jarray.get(0).getAsJsonObject().get("Paid").getAsInt());
 				return false;
 			}
 
-			else {
+			else {	//paid bill
 				put("table", "&TableID=" + tableID + "&Status=Available");
 				return true;
 			}
-		//}
-		//return false;
+	
 	}
 
 	public static int addOrderItemToOrder(int orderID, int menuItemID, double purchasePrice, String notes){
@@ -384,7 +376,7 @@ public class APIRequestor {
 		JsonObject  jobject = jelement.getAsJsonObject();
 		int statusCode = jobject.get("statusCode").getAsInt();
 		int orderItemID = -1;
-		System.out.println("Status code for add orderItem: " + statusCode);
+		
 		if (statusCode == 200){
 			JsonArray jarray = jobject.getAsJsonArray("data");
 			orderItemID = jarray.get(0).getAsJsonObject().get("OrderItemID").getAsInt();

@@ -8,7 +8,7 @@ import android.app.Application;
 public enum sessionInfo{
 	INSTANCE;
 
-	//testing this out
+	//method to get the instance
 	public static sessionInfo getInstance(){
 	
 		
@@ -24,11 +24,10 @@ private int userid;
 	public boolean verify(String username, String password, String sitecode){
 		boolean valid = APIRequestor.login(username, password);
 		
-		//change this later to a API call
+		//if the login is valid, populate the session info
 		if(valid){
 			setUsername(username);
 			setPassword(password);
-			//setSitecode(sitecode);
 			setSitecode(APIRequestor.getMyRestaurantID()+"");
 			setUserID(APIRequestor.getMyUserID());
 			tables = new ArrayList<table>();

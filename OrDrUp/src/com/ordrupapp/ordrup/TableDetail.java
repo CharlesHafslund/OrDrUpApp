@@ -67,9 +67,7 @@ public class TableDetail extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		//		getMenuInflater().inflate(R.menu.table_detail, menu);
-		//		return true;
-		//	}
+		
 		super.onCreateOptionsMenu(menu);
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.settings_menu, menu);
@@ -165,7 +163,8 @@ public class TableDetail extends Activity {
 
 
 	}
-
+	
+	//Not implemented, stub for a future release
 	public void clearTable(View view){
 		if(sessionInfo.getInstance().getTables().get(currentTableIndex).clearTable()){
 			Toast.makeText(getApplicationContext(), "Table Cleared.", Toast.LENGTH_LONG).show();

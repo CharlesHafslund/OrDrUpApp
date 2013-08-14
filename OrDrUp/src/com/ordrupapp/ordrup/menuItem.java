@@ -1,12 +1,10 @@
 package com.ordrupapp.ordrup;
 
-import android.content.Intent;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class menuItem {
 	private int menuItemID;
@@ -15,14 +13,6 @@ public class menuItem {
 	private int RestaurantID;
 	private String Category;
 	
-	/*
-	 * Category: "Appetizer"
-MenuItemID: "158"
-Name: "Chips and Salsa"
-PrepTime: "4"
-Price: "5.99"
-RestaurantID: "22"
-	 */
 	
 	menuItem(int menuItemID, String name, double price){
 		this.menuItemID = menuItemID;

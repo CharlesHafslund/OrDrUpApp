@@ -22,6 +22,10 @@ public class table implements Comparable {
 		return tableID;
 	}
 	
+	public void setTableID(int tableID){
+		this.tableID = tableID;
+	}
+	
 	public int getTableNumber(){
 		return tableNumber;
 	}
@@ -46,15 +50,16 @@ public class table implements Comparable {
 		else return tableOrders.size();
 	}
 	
+	//not implemented, stub for a future release
 	public boolean clearTable(){
 		//check it bill paid for table
 		if (APIRequestor.getBillingStatus(tableID)){
 			//if paid, set status to open
-			System.out.println("Good to clear");
+			
 			return true;
 		}
 		else {
-			System.out.println("Not good to clear");
+			
 			return false;
 		}
 		

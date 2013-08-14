@@ -162,7 +162,6 @@ public class OrderDetails extends Activity {
 			orderItemNotes = new TextView(view.getContext());
 			orderItemNotes.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
 			
-			System.out.println("Notes: " + orderItemNotesString);
 			
 			//add notes if any
 			if (!orderItemNotesString.isEmpty()) {
